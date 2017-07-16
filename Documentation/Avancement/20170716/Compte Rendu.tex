@@ -1,0 +1,66 @@
+%-*- coding: utf-8 -*-
+\documentclass[11pt,a4paper,french,twoside,openright]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}%pour insérer images et pdf entre autres
+	\graphicspath{{images/}}%pour spécifier le chemin d'accès aux images
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}%réglages des marges du document selon vos préférences ou celles de votre établissemant
+\usepackage[Lenny]{fncychap}%pour de jolis titres de chapitres voir la doc pour d'autres styles.
+\usepackage{babel}
+\usepackage[babel=true]{csquotes} % csquotes va utiliser la langue définie dans babel
+
+\usepackage{fancyhdr}%pour les entêtes et pieds de pages
+	\setlength{\headheight}{14.2pt}% hauteur de l'entête
+        \chead{\textbf{VITAMEAL}}
+        \lhead{}
+        \rhead{}
+	\cfoot{Formation Ingénieur Informatique en alternance - Première année}
+	\lfoot{\textbf{CNAM}}%
+  	\rfoot{\textbf{\thepage/\pageref{LastPage}}}
+ 	\renewcommand{\headrulewidth}{0.4pt}%trait horizontal pour l'entête
+  	\renewcommand{\footrulewidth}{0.4pt}%trait horizontal pour les pieds de pages
+
+\usepackage[french]{nomencl}
+\makenomenclature
+\usepackage{hyperref}
+\usepackage{mathtools}
+\begin{document}
+\pagestyle{fancy}
+
+\begin{center}\bfseries\Huge
+COMPTE RENDU DE TÉLÉCONFÉRENCE
+\end{center}
+
+\textbf{Du      :} dimanche 06/07/2017 à 20h30
+
+\textbf{Objet   :} Avancement projet VITAMEAL
+
+\textbf{Présents:} Nicolas SYMPHORIEN, Sonia OTHMANI, Jean-Félix BENITEZ
+
+\textbf{Absent :} Personne.
+
+\textbf{Diffusion:} Nicolas SYMPHORIEN, Sonia OTHMANI, Jean-Félix BENITEZ
+
+\hrulefill
+
+\section{Travail réalisé}
+
+Jean-Félix à mis à jour le modèle du domaine et le code correspondant et à créer un jeu de données de test trouvable dans le dossier suivant : src/main/java/com/ipstcnam/vitameal/entity/VitUse.sql.
+
+Nicolas continue à implémenter une première version de sa conception du cas d'utilisation composer plat.
+
+Sonia continue à peaufiner 
+
+\section{Travail à venir}
+
+La priorité est donnée au rapport et à la présentation pour montrer un avancement du projet à jour.
+
+Jean-Félix se charge de restructurer le rapport pour coller au plat présenter par M. Batatia dès ce soir, pour permettre à Sonia et à Nicolas d'ajouter leurs éléments de conception.
+Sonia continue à peaufiner sa conception
+Nicolas met à jour ses éléments de conception par rapport à son implémentation.
+
+\section{Prochaine réunion}
+Téléconférence mercredi 19  juillet à 20h00.
+
+\label{LastPage}
+\end{document}
