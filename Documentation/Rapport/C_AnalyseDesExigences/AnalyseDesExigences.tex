@@ -1,0 +1,44 @@
+%-*- coding: utf-8 -*-
+\textcolor[RGB]{46, 116, 181}{\chapter{Analyse des exigences}}
+\section{Partie prenantes}
+\begin{itemize}
+\item Participantes~: les diététiciens, le service restauration
+\item Concernés~: les médecins, la direction (budget)
+\item Impactées~: les patients
+\end{itemize}
+
+\section{Les besoins}
+\begin{description}
+\item[] En tant que diététicien, j’ai besoin de :
+\begin{description}
+ \item[N001:] pouvoir renseigner le profil diététique des patients, afin qu’ils
+ puissent bénéficier de menus adaptés.
+ \item[N002:] pouvoir élaborer les menus des 3 repas journaliers
+ (petit-déjeuner, déjeuner et dîner dont la composition est décrite en annexe
+ \ref{annexeA}), de façon automatique, en tenant compte de grammages dépendant du type d'aliments et de la tranche d'age (Document \ref{docNutrition}, Annexe 2).
+ \item[N003:] pouvoir saisir des plats et leur composition.
+ \item[N004:] élaborer des menus selon les fréquences de service, selon le
+ document \ref{docNutrition}, Annexe 4.
+ \item[N005:] classer chaque aliment dans une des catégories d’aliments citée
+ dans les tables de grammages du document \ref{docNutrition}, Annexes 2 et 4.
+\end{description}
+\item[N006:] En tant qu’administrateur du site internet de l’hôpital, j’ai
+besoin de récupérer le menu de la semaine, afin pouvoir l’intégrer au site.
+\item[N007:] En tant que médecin, j’ai besoin de consulter les profils
+diététiques des patients admis, pour les  valider.
+\item[N008:] En tant que cuisinier du service restauration, j’ai besoin de
+consulter les menus élaborés, afin de pouvoir les préparer et prévoir les ingrédients à commander.
+\item[N009:] En tant qu’agent de restauration hospitalière,  j’ai besoin de
+connaître les menus de chaque patient, afin de pouvoir assembler les plateaux repas.
+\end{description}
+\section{Les contraintes}
+\begin{description}
+\item[N010:] Les médecins doivent pouvoir vérifier / valider les profils
+diététiques des patients.
+\item[N011:] La direction fixe un budget maximum par menu.
+\end{description}
+
+\section{Exigences}
+
+\input{../Exigences/Exigences}
+

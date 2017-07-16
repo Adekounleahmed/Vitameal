@@ -1,27 +1,30 @@
 %-*- coding: utf-8 -*-
 \documentclass[11pt,a4paper,twoside,openright]{book} %report
-\input{preambule/preambule}
+\input{0_0_preambule/preambule}
 
 \begin{document}
 \let\cleardoublepage\clearpage
 \frontmatter
 \pagestyle{front}
-\input{page-de-couverture/page-de-couverture}
+\input{0_page-de-couverture/page-de-couverture}
 \thispagestyle{empty}                        % pour la page de garde toute blanche
 
 \mainmatter
 \pagestyle{main}
-\input{Evolutions/Evolutions}
+\input{1_Evolutions/Evolutions}
 \tableofcontents
 \listoffigures
 \listoftables
-\input{Presentation/Presentation}
-\input{Documents/Documents}
-\input{Terminologie/Terminologie}
-\input{Initialisation/Initialisation}
-\input{Elaboration/Elaboration}
-%\input{Construction/Construction}
-%\input{Transition/Transition}
+\input{2_Presentation/Presentation}
+\input{3_Documents/Documents}
+\input{4_Terminologie/Terminologie}
+\input{A_ContexteEtProbleme/ContexteEtProbleme}
+\input{B_MethodeDeTravail/MethodeDeTravail}
+\input{C_AnalyseDesExigences/AnalyseDesExigences}
+\input{D_AnalyseFonctionnelle/AnalyseFonctionnelle}
+\input{E_Architecture/Architecture}
+\input{F_Codage/Codage}
+\input{G_Bilan/Bilan}
 
 \appendix
 \newcommand{\annexe}[1]{%
@@ -29,6 +32,6 @@
 	\phantomsection%
 	\addcontentsline{toc}{chapter}{\appendixname~{\thechapter}: #1}%
 	\chapter*{\appendixname~{\thechapter}: #1}}
-\input{Annexes/AnnexeA}
+\input{Z_Annexes/AnnexeA}
 \label{LastPage}
 \end{document}
