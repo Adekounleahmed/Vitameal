@@ -7,6 +7,10 @@
 	<persistence-unit name="com.ipstcnam.vitameal.jpa">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 			<class>com.ipstcnam.vitameal.beans.ProfilPatient</class>
+			<class>com.ipstcnam.vitameal.entity.ComposantPlat</class>
+			<class>com.ipstcnam.vitameal.entity.Ingredient</class>
+			<class>com.ipstcnam.vitameal.entity.Plat</class>
+			<class>com.ipstcnam.vitameal.entity.pk.ComposantPlatPK</class>
 		<properties>
 			<!-- PROPRIETES STANDARDS JPA -->
  			<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
@@ -24,6 +28,8 @@
 				create-drop: drop the schema when the SessionFactory is closed explicitly, typically when the application is stopped.
 			-->
   			<property name="hibernate.hbm2ddl.auto" value="update"/>
+  			<property name="javax.persistence.schema-generation.create-database-schemas" value="false"/>
+  			<property name="javax.persistence.schema-generation.scripts.action" value="none"/>
 		</properties>
 	</persistence-unit>
 </persistence>

@@ -1,11 +1,13 @@
 package com.ipstcnam.vitameal.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * Cette classe représente un ingrédient utilisé dans les plats.
@@ -19,15 +21,18 @@ public class Ingredient implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Integer idIngredient;
+	private Integer id;
 	private String nom;
 
-	public Integer getIdIngredient() {
-		return idIngredient;
+	@OneToMany(mappedBy="ingredient")
+	private Collection<ComposantPlat> composantPlats;
+
+	public Integer getId() {
+		return id;
 	}
 
-	public void setIdIngredient(Integer idIngredient) {
-		this.idIngredient = idIngredient;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNom() {

@@ -1,84 +1,138 @@
 package com.ipstcnam.vitameal.forms;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
-import com.ipstcnam.vitameal.entity.ComposantPlat;
-import com.ipstcnam.vitameal.entity.Ingredient;
-import com.ipstcnam.vitameal.entity.Plat;
-import com.ipstcnam.vitameal.entity.pk.ComposantPlatPK;
+import com.ipstcnam.vitameal.beans.enums.ActionPlatEnum;
+import com.ipstcnam.vitameal.beans.enums.UniteIngredient;
 import com.ipstcnam.vitameal.forms.exception.MalformedFormException;
 
 public class PlatForm {
-	
-	private Plat plat;
-	private Ingredient ingredient;
-	private ComposantPlat composantPlat;
-	
+
+	private ActionPlatEnum action;
+	private Integer idPlat;
+	private String nomPlat;
+	private List<LigneIngredient> ligneIngredients;
+
 	public PlatForm(HttpServletRequest request) throws MalformedFormException {
-		createEntityFromRequest(request);
+		this.action = parseActionPlat(request.getParameter("action"));
+
+		this.idPlat = parseInteger(request.getParameter("p_idPlat"));
+		this.nomPlat = request.getParameter("p_nomPlat");
+
+		String[] idIngredients = request.getParameterValues("p_idIngredient");
+		String[] nomIngredients = request.getParameterValues("p_nomIngredient");
+		String[] quantiteIngredients = request.getParameterValues("p_quantiteIngredient");
+		String[] uniteIngredients = request.getParameterValues("p_uniteIngredient");
+		
+		if (!ActionPlatEnum.supprimer.equals(action)) {
+			validateIngredientParameter(idIngredients, nomIngredients, quantiteIngredients, uniteIngredients);
+	
+			this.ligneIngredients = new ArrayList<>();
+			for (int i = 0; i < nomIngredients.length; i++) {
+				Integer idIngredient = parseInteger(idIngredients[i]);
+				String nomIngredient = nomIngredients[i];
+				float quantiteIngredient = parseFloat(quantiteIngredients[i]);
+				UniteIngredient uniteIngredient = parseUniteIngredient(uniteIngredients[i]);
+	
+				LigneIngredient ligneIngredient = new LigneIngredient(idIngredient, nomIngredient, quantiteIngredient,
+						uniteIngredient);
+				this.ligneIngredients.add(ligneIngredient);
+			}
+		}
 	}
 
-	private void createEntityFromRequest(HttpServletRequest request) throws MalformedFormException {
-		createPlat(request);
-		createIngredient(request);
-		createComposantPlat(request);
-	}
-	
-
-	private void createPlat(HttpServletRequest request) {
-		plat = new Plat();
-		plat.setNom(request.getParameter("p_nomPlat"));
-		
-	}
-	
-	private void createIngredient(HttpServletRequest request) {
-		ingredient = new Ingredient();
-		ingredient.setNom(request.getParameter("p_nomIngredient"));
+	private ActionPlatEnum parseActionPlat(String actionPlatValue) throws MalformedFormException {
+		ActionPlatEnum actionPlat = ActionPlatEnum.valueOf(actionPlatValue);
+		if (actionPlat == null) {
+			throw new MalformedFormException(actionPlatValue + " devrais etre dans l'enum ActionPlatEnum");
+		}
+		return actionPlat;
 	}
 
-	private void createComposantPlat(HttpServletRequest request) throws MalformedFormException {
-		composantPlat = new ComposantPlat();
-		
-		ComposantPlatPK composantPlatPK = new ComposantPlatPK();
-		composantPlatPK.setIngredient(ingredient);
-		composantPlatPK.setPlat(plat);
-		
-		composantPlat.setComposantPlatId(composantPlatPK);
-		composantPlat.setQuantite(parseFloat(request.getParameter("p_quantiteIngredient")));
-		composantPlat.setUnite(request.getParameter("p_uniteIngredient"));
+	private Integer parseInteger(String string) throws MalformedFormException {
+		try {
+			if (string.isEmpty()) {
+				return null;
+			}
+			return Integer.parseInt(string);
+		} catch (NumberFormatException ex) {
+			throw new MalformedFormException(string + " devrais etre un entier", ex);
+		}
 	}
-	
+
+	private UniteIngredient parseUniteIngredient(String uniteIngredientValue) throws MalformedFormException {
+		UniteIngredient uniteIngredient = UniteIngredient.valueOf(uniteIngredientValue);
+		if (uniteIngredient == null) {
+			throw new MalformedFormException(uniteIngredientValue + " devrais etre dans l'enum UniteIngredient");
+		}
+		return uniteIngredient;
+	}
+
+	private void validateIngredientParameter(String[] idIngredient, String[] nomIngredients,
+			String[] quantiteIngredients, String[] uniteIngredients) throws MalformedFormException {
+		MalformedFormException exception = new MalformedFormException(
+				"Il n'y as pas le bon nombre de parametre pour les ingredient");
+		
+		if (idIngredient == null || nomIngredients == null || quantiteIngredients == null || uniteIngredients == null) {
+			throw exception;
+		}
+		if (idIngredient.length != nomIngredients.length) {
+			throw exception;
+		}
+		if (nomIngredients.length != quantiteIngredients.length) {
+			throw exception;
+		}
+		if (quantiteIngredients.length != uniteIngredients.length) {
+			throw exception;
+		}
+
+	}
+
 	private float parseFloat(String string) throws MalformedFormException {
 		try {
 			return Float.parseFloat(string);
 		} catch (NumberFormatException ex) {
-			throw new MalformedFormException(ex);
+			throw new MalformedFormException(string + " devrais etre un flottant", ex);
 		}
-		
+
 	}
 
-	public Plat getPlat() {
-		return plat;
+	public ActionPlatEnum getAction() {
+		return action;
 	}
 
-	public void setPlat(Plat plat) {
-		this.plat = plat;
+	public void setAction(ActionPlatEnum action) {
+		this.action = action;
 	}
 
-	public Ingredient getIngredient() {
-		return ingredient;
+	public Integer getIdPlat() {
+		return idPlat;
 	}
 
-	public void setIngredient(Ingredient ingredient) {
-		this.ingredient = ingredient;
+	public String getNomPlat() {
+		return nomPlat;
 	}
 
-	public ComposantPlat getComposantPlat() {
-		return composantPlat;
+	public int numberOfLigneIngredient() {
+		return ligneIngredients.size();
 	}
 
-	public void setComposantPlat(ComposantPlat composantPlat) {
-		this.composantPlat = composantPlat;
+	public LigneIngredient getLigneIngredients(int index) {
+		return ligneIngredients.get(index);
+	}
+
+	public boolean contain(Integer idIngredient) {
+		for (LigneIngredient ligneIngredient : ligneIngredients) {
+
+			Integer idIngredientLigne = ligneIngredient.getIdIngredient();
+			if (idIngredientLigne != null && idIngredientLigne.equals(idIngredient)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

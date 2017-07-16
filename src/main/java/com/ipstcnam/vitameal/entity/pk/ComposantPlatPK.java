@@ -3,8 +3,8 @@ package com.ipstcnam.vitameal.entity.pk;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
-import javax.persistence.ManyToOne;
 
+import com.ipstcnam.vitameal.entity.ComposantPlat;
 import com.ipstcnam.vitameal.entity.Ingredient;
 import com.ipstcnam.vitameal.entity.Plat;
 
@@ -22,27 +22,56 @@ import com.ipstcnam.vitameal.entity.Plat;
 public class ComposantPlatPK implements Serializable {
 
 	private static final long serialVersionUID = 91100405592885502L;
+	
+	private Integer platId;
+	
+	private Integer ingredientId;
 
-	@ManyToOne
-	private Plat plat;
-
-	@ManyToOne
-	private Ingredient ingredient;
-
-	public Plat getPlat() {
-		return plat;
+	public Integer getPlatId() {
+		return platId;
 	}
 
-	public void setPlat(Plat plat) {
-		this.plat = plat;
+	public void setPlatId(Integer platId) {
+		this.platId = platId;
 	}
 
-	public Ingredient getIngredient() {
-		return ingredient;
+	public Integer getIngredientId() {
+		return ingredientId;
 	}
 
-	public void setIngredient(Ingredient ingredient) {
-		this.ingredient = ingredient;
+	public void setIngredientId(Integer ingredientId) {
+		this.ingredientId = ingredientId;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((ingredientId == null) ? 0 : ingredientId.hashCode());
+		result = prime * result + ((platId == null) ? 0 : platId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ComposantPlatPK other = (ComposantPlatPK) obj;
+		if (ingredientId == null) {
+			if (other.ingredientId != null)
+				return false;
+		} else if (!ingredientId.equals(other.ingredientId))
+			return false;
+		if (platId == null) {
+			if (other.platId != null)
+				return false;
+		} else if (!platId.equals(other.platId))
+			return false;
+		return true;
 	}
 
 }

@@ -1,11 +1,13 @@
 package com.ipstcnam.vitameal.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * Cette classe représente un plat utilisé dans les menus.
@@ -19,15 +21,19 @@ public class Plat implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Integer idPlat;
+	private Integer id;
+	
 	private String nom;
 
-	public Integer getIdPlat() {
-		return idPlat;
+	@OneToMany(mappedBy="plat")
+	private Collection<ComposantPlat> composantPlats;
+
+	public Integer getId() {
+		return id;
 	}
 
-	public void setIdPlat(Integer idPlat) {
-		this.idPlat = idPlat;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNom() {
@@ -37,5 +43,15 @@ public class Plat implements Serializable {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+
+	public Collection<ComposantPlat> getComposantPlats() {
+		return composantPlats;
+	}
+
+	public void setComposantPlats(Collection<ComposantPlat> composantPlats) {
+		this.composantPlats = composantPlats;
+	}
+	
+	
 
 }

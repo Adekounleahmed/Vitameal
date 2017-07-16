@@ -1,4 +1,4 @@
 /**
- * Package contenant les entités de la web aplication Vitameal.
+ * Package contenant les entités de l'aplication web Vitameal.
  */
 package com.ipstcnam.vitameal.entity;

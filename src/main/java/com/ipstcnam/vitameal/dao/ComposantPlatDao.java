@@ -5,22 +5,35 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.persistence.metamodel.SingularAttribute;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.ipstcnam.vitameal.entity.ComposantPlat;
-import com.ipstcnam.vitameal.listeners.ApplicationListener;
+import com.ipstcnam.vitameal.entity.ComposantPlat_;
+import com.ipstcnam.vitameal.entity.pk.ComposantPlatPK;
+import com.ipstcnam.vitameal.entity.pk.ComposantPlatPK_;
 
+/**
+ * DAO des entités {@link ComposantPlat}.
+ * 
+ * @author Nicolas Symphorien
+ *
+ */
 @Stateless
 public class ComposantPlatDao implements Serializable {
-
 	private static final long serialVersionUID = -7830864526566789037L;
+	private static final Logger logger = LogManager.getLogger(ComposantPlatDao.class);
 	
-	@PersistenceContext(unitName="com.ipstcnam.vitameal.jpa")
-	private EntityManager em;
+	transient private EntityManager em;
 	
-	public ComposantPlatDao() {
-		em = ApplicationListener.getEmf().createEntityManager();
+	public ComposantPlatDao(EntityManager em) {
+		this.em = em;
 	}
 	
 	public void creer(ComposantPlat composantPlat) {
@@ -30,20 +43,62 @@ public class ComposantPlatDao implements Serializable {
 			em.getTransaction().commit();
 		} catch(Exception e) {
 			em.getTransaction().rollback();
-			e.printStackTrace();
-			System.out.println("Une erreur est survenue lors de l'ajout :");
-			System.out.println(e.getMessage());
+			logger.error("Une erreur est survenue lors de l'ajout d'un composant plat en base de données", e);
+		}
+	}
+	
+	public ComposantPlat findByPk(ComposantPlatPK composantPlatPK) {
+		return em.find(ComposantPlat.class, composantPlatPK);
+	}
+
+	public List<ComposantPlat> findByPlatId(Integer idPlat) {
+		CriteriaQuery<ComposantPlat> criteriaQuery = findBy(idPlat, ComposantPlatPK_.platId);
+		
+		TypedQuery<ComposantPlat> typedQuery = em.createQuery(criteriaQuery);		
+		return typedQuery.getResultList();
+	}
+	
+	public List<ComposantPlat> findByIngredientId(Integer idIngredient) {
+		CriteriaQuery<ComposantPlat> criteriaQuery = findBy(idIngredient, ComposantPlatPK_.ingredientId);
+		
+		TypedQuery<ComposantPlat> typedQuery = em.createQuery(criteriaQuery);		
+		return typedQuery.getResultList();
+	}
+	
+	public void update(ComposantPlat composantPlat) {
+		em.getTransaction().begin();
+		try {
+			em.merge(composantPlat);
+			em.getTransaction().commit();
+		} catch(Exception e) {
+			em.getTransaction().rollback();
+			logger.error("Une erreur est survenue lors de l'édition d'un composant plat en base de données", e);
 		}
 	}
 
-	public List<ComposantPlat> findAllByPlatId(Integer idPlat) {
-		String hqlQuery = "select composantPlat from ComposantPlat composantPlat where composantPlat.composantPlatId.plat.idPlat = :idPlat";
-		Query query = em.createQuery(hqlQuery);
-		query.setParameter("idPlat", idPlat);
-		List list = query.getResultList();
-		return list;
+	private CriteriaQuery<ComposantPlat> findBy(Integer idToFind, SingularAttribute<ComposantPlatPK, Integer> persistanceId) {
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		
+		CriteriaQuery<ComposantPlat> criteriaQuery = criteriaBuilder.createQuery(ComposantPlat.class);
+		Root<ComposantPlat> platRoot = criteriaQuery.from(ComposantPlat.class);
+		criteriaQuery.select(platRoot);
+		criteriaQuery.where(criteriaBuilder.equal(platRoot.get(ComposantPlat_.pk).get(persistanceId), idToFind));
+		return criteriaQuery;
+	}
+
+	public void delete(ComposantPlat composantPlat) {
+		em.getTransaction().begin();
+		try {
+			em.remove(composantPlat);
+			em.getTransaction().commit();
+		} catch(Exception e) {
+			em.getTransaction().rollback();
+			logger.error("Une erreur est survenue lors de la suppression d'un composant plat en base de données", e);
+		}
 		
 	}
+
+	
 
 }
 

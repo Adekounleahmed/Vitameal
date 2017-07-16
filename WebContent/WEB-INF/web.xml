@@ -1,63 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
 
-  <display-name>VitApp</display-name>
+	<display-name>VitApp</display-name>
 
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
 
-  <servlet>
-    <description>Pour gérer les sessions de travails des différents intervenants.</description>
-    <servlet-name>Connexion</servlet-name>
-    <servlet-class>com.ipstcnam.vitameal.servlets.Connexion</servlet-class>
-  </servlet>
+	<servlet>
+		<description>Pour gérer les sessions de travails des différents intervenants.</description>
+		<servlet-name>Connexion</servlet-name>
+		<servlet-class>com.ipstcnam.vitameal.servlets.Connexion</servlet-class>
+	</servlet>
 
-  <servlet-mapping>
-    <servlet-name>Connexion</servlet-name>
-    <url-pattern>/index.html</url-pattern>
-    <url-pattern>/index.htm</url-pattern>
-    <url-pattern>/index.jsp</url-pattern>
-    <url-pattern>/default.html</url-pattern>
-    <url-pattern>/default.htm</url-pattern>
-    <url-pattern>/default.jsp</url-pattern>
-    <url-pattern>/connexion</url-pattern>
-  </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Connexion</servlet-name>
+		<url-pattern>/index.html</url-pattern>
+		<url-pattern>/index.htm</url-pattern>
+		<url-pattern>/index.jsp</url-pattern>
+		<url-pattern>/default.html</url-pattern>
+		<url-pattern>/default.htm</url-pattern>
+		<url-pattern>/default.jsp</url-pattern>
+		<url-pattern>/connexion</url-pattern>
+	</servlet-mapping>
 
-  <servlet>
-    <description>Pour gérer les profils patients.</description>
-    <servlet-name>GererProfilPatient</servlet-name>
-    <servlet-class>com.ipstcnam.vitameal.servlets.GererProfilPatient</servlet-class>
-  </servlet>
+	<servlet>
+		<description>Pour gérer les profils patients.</description>
+		<servlet-name>GererProfilPatient</servlet-name>
+		<servlet-class>com.ipstcnam.vitameal.servlets.GererProfilPatient</servlet-class>
+	</servlet>
 
-  <servlet-mapping>
-    <servlet-name>GererProfilPatient</servlet-name>
-    <url-pattern>/ProfilPatient</url-pattern>
-  </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GererProfilPatient</servlet-name>
+		<url-pattern>/ProfilPatient</url-pattern>
+	</servlet-mapping>
 
-  <servlet>
-    <description>Pour gérer les plats.</description>
-    <servlet-name>Plats</servlet-name>
-    <servlet-class>com.ipstcnam.vitameal.servlets.Plats</servlet-class>
-  </servlet>
+	<servlet>
+		<description>Pour gérer les plats.</description>
+		<servlet-name>Plats</servlet-name>
+		<servlet-class>com.ipstcnam.vitameal.servlets.PlatsServlet</servlet-class>
+	</servlet>
 
-  <servlet-mapping>
-    <servlet-name>Plats</servlet-name>
-    <url-pattern>/Plats</url-pattern>
-  </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Plats</servlet-name>
+		<url-pattern>/Plats/*</url-pattern>
+	</servlet-mapping>
 
-  <session-config>
-    <session-timeout>5</session-timeout>
-    <cookie-config>
-      <comment>Identifiant de session.</comment>
-      <max-age>100</max-age>
-    </cookie-config>
-    <tracking-mode>COOKIE</tracking-mode>
-  </session-config>
+	<!-- WEB DEPENDENCIES SERVLET -->
+	<servlet>
+		<servlet-name>WebjarsServlet</servlet-name>
+		<servlet-class>org.webjars.servlet.WebjarsServlet</servlet-class>
+		<init-param>
+			<param-name>disableCache</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WebjarsServlet</servlet-name>
+		<url-pattern>/webjars/*</url-pattern>
+	</servlet-mapping>
+
+	<session-config>
+		<session-timeout>5</session-timeout>
+		<cookie-config>
+			<comment>Identifiant de session.</comment>
+			<max-age>100</max-age>
+		</cookie-config>
+		<tracking-mode>COOKIE</tracking-mode>
+	</session-config>
+
+	<jsp-config>
+		<jsp-property-group>
+			<url-pattern>*.jsp</url-pattern>
+			<trim-directive-whitespaces>true</trim-directive-whitespaces>
+		</jsp-property-group>
+	</jsp-config>
 
 </web-app>

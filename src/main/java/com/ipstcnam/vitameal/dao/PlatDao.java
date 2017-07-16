@@ -5,47 +5,80 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.ipstcnam.vitameal.entity.Plat;
-import com.ipstcnam.vitameal.listeners.ApplicationListener;
 
+/**
+ * DAO des entités {@link Plat}.
+ * 
+ * @author Nicolas Symphorien
+ *
+ */
 @Stateless
 public class PlatDao implements Serializable {
-
 	private static final long serialVersionUID = -5676123578912282186L;
+	private static final Logger logger = LogManager.getLogger(PlatDao.class);
 	
-	@PersistenceContext(unitName="com.ipstcnam.vitameal.jpa")
-	private EntityManager em;
+	transient private EntityManager em;
 	
-	public PlatDao() {
-		em = ApplicationListener.getEmf().createEntityManager();
+	public PlatDao(EntityManager em) {
+		this.em = em;
 	}
 	
-	public void creer(Plat plat) {
+	public void create(Plat plat) {
 		em.getTransaction().begin();
 		try {
 			em.persist(plat);
 			em.getTransaction().commit();
 		} catch(Exception e) {
 			em.getTransaction().rollback();
-			e.printStackTrace();
-			System.out.println("Une erreur est survenue lors de l'ajout :");
-			System.out.println(e.getMessage());
+			logger.error("Une erreur est survenue lors de l'ajout d'un plat en base de données", e);
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Plat> findAll() {
-		String hqlQuery = "select plat from Plat plat";
-		Query query = em.createQuery(hqlQuery);
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 		
-		return query.getResultList();
+		CriteriaQuery<Plat> criteriaQuery = criteriaBuilder.createQuery(Plat.class);
+		Root<Plat> platRoot = criteriaQuery.from(Plat.class);
+		criteriaQuery.select(platRoot);
+		
+		TypedQuery<Plat> typedQuery = em.createQuery(criteriaQuery);		
+		return typedQuery.getResultList();
 	}
 	
 	public Plat findById(Integer idPlat) {
 		return em.find(Plat.class, idPlat);
+	}
+
+	public void update(Plat plat) {
+		em.getTransaction().begin();
+		try {
+			em.merge(plat);
+			em.getTransaction().commit();
+		} catch(Exception e) {
+			em.getTransaction().rollback();
+			logger.error("Une erreur est survenue lors de l' édition d'un plat  en base de données", e);
+		}
+	}
+
+	public void delete(Plat plat) {
+		em.getTransaction().begin();
+		try {
+			em.remove(plat);
+			em.getTransaction().commit();
+		} catch(Exception e) {
+			em.getTransaction().rollback();
+			logger.error("Une erreur est survenue lors de la suppression d'un plat en base de données", e);
+		}
+		
 	}
 
 }
