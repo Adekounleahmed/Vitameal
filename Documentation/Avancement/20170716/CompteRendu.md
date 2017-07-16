@@ -1,6 +1,6 @@
 **COMPTE RENDU DE TÉLÉCONFÉRENCE**
 
-**Du :** dimanche 06/07/2017 à 20h30
+**Du :** dimanche 16/07/2017 à 20h30
 
 **Objet :** Avancement projet VITAMEAL
 
