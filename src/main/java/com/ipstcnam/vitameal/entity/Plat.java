@@ -22,10 +22,16 @@ public class Plat implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer id;
-	
+
 	private String nom;
 
-	@OneToMany(mappedBy="plat")
+	private Integer nombreService;
+
+	private Integer periode;
+
+	private boolean maximum;
+
+	@OneToMany(mappedBy = "plat")
 	private Collection<ComposantPlat> composantPlats;
 
 	public Integer getId() {
@@ -51,7 +57,29 @@ public class Plat implements Serializable {
 	public void setComposantPlats(Collection<ComposantPlat> composantPlats) {
 		this.composantPlats = composantPlats;
 	}
-	
-	
+
+	public Integer getNombreService() {
+		return nombreService;
+	}
+
+	public void setNombreService(Integer nombreService) {
+		this.nombreService = nombreService;
+	}
+
+	public Integer getPeriode() {
+		return periode;
+	}
+
+	public void setPeriode(Integer periode) {
+		this.periode = periode;
+	}
+
+	public boolean isMaximum() {
+		return maximum;
+	}
+
+	public void setMaximum(boolean maximum) {
+		this.maximum = maximum;
+	}
 
 }
