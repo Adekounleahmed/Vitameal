@@ -9,9 +9,9 @@
 
 \textbf{Algorithme (voir \autoref{ClassesMenuGen}):}
 \begin{enumerate}
-\item Sélectionner le groupe de patient dont il faut élaborer les menus
-\item Extraire de ce groupe de patients les contraintes sous forme d'une table d'\emph{AttributAliment} (voir \autoref{ModeleDuDomaine}).
-\item Générer une table contenant en plus des identifiants de plats la liste de leurs ingrédients, sous forme d'\emph{AttributAliment}.
+\item Sélectionner le groupe de patient dont il faut élaborer les menus.
+\item Extraire de ce groupe de patients une table des contraintes (\emph{Formes}, \emph{Familles}, \emph{Textures}, \emph{AlimentsBase}) voir \autoref{ModeleDuDomaine}.
+\item Générer une table contenant en plus des identifiants de plats la liste de leurs ingrédients (mêmes attributs que les contraintes).
 \item Retirer de cette table, les plats incompatibles avec les contraintes listées dans la première table.
 \item En comparant la table de plats résultante avec les menus déjà pris, extraire de la liste des plats (première table) les plats compatibles avec les fréquences de services.
 \item élaborer les menus à partir de la liste des plats restants.
