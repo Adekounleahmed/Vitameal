@@ -1,0 +1,34 @@
+%-*- coding: utf-8 -*-
+\textcolor[RGB]{46, 116, 181}{\chapter{Analyse fonctionnelle}}
+
+\section{Cas d'utilisation}
+
+Les acteurs humains pour le système Vitameal sont les suivants :
+
+Le diététicien : la personne en charge de l'élaboration des menus servis aux patients. Pour cela il doit pouvoir composer les menus des 3 repas journaliers selon les contraintes médicales de chaque patients. Il peut remplir lui-même les profils diététiques des patients mais ceux-ci doivent être validé par un médecin.
+
+Le médecin : la personne en charge du dossier médical des patients, qui valide les profils diététiques remplit par les diététiciens.
+ 
+Le service restauration : Les personnes en charge de la préparation et de la commande des repas.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{../../CasDUtilisations/diagramme_cas_utilisation.png}
+\caption{Diagramme des cas d'utilisation principal}
+\end{figure}
+
+Le stéréotype ``secondaire'' dans le diagramme des cas d'utilisation principal indique que le cas d'utilisation ne fait pas partie des cas d'utilisation principaux et qu'il n'est pas obligatoire pour que le système fonctionne.
+
+\section{Description des cas d'utilisation}
+
+\input{../CasDUtilisations/PreparerMenus/uc_preparer_menus.tex}
+
+\input{../CasDUtilisations/ConsulterMenus/uc_consulter_menus.tex}
+
+\input{../CasDUtilisations/CompositionPlat/uc_composer_plat.tex}
+
+\input{../CasDUtilisations/MenuGen/MenuGen.tex}
+
+\input{../CasDUtilisations/ProfilPatient/uc_renseigner_profil_patient}
+
+\input{../backlog/backlog.tex}

@@ -1,5 +1,5 @@
 %-*- coding: utf-8 -*-
-\subsubsection{Modèle du domaine}
+\subsection{Modèle du domaine}
 %\rowcolors{2}{Turquoise}{} % {1}{red!26!green!29!blue!31!}{}
 \begin{figure}
   \centering
@@ -23,7 +23,7 @@ Les contraintes peuvent porter aussi bien sur l'aliment luis même, que sur sa f
 Les quatres classes \classe{AlimentsBase}, \classe{Formes}, \classe{Familles} et \classe{Textures} véhicules ces informations. Elles servent aussi à renseigner la classe \classe{Ingredient} qui définit les ingrédients composant un \classe{Plat}. Les quantités misent en oeuvre sont décrites dans la classe~association \classe{ComposantPlat}. Un plat, en plus des ingrédients qui le compose, contient des informations liées à sa fréquence de service: nombre de services (\attribut{nbServices}) maximum ou minimum (\attribut{minMax}) par période (\attribut{periode}).
 La classe \classe{GroupePatients} permet d'avoir la liste des patients qui subissent les mêmes contraintes alimentaires. Il y aura donc autant de menus à faire qu'il y a de groupes de patients.
 
-\subsubsection{Modèle Logique de Données}
+\subsection{Modèle Logique de Données}
 Le dictionnaire est décrit \autoref{DictionnaireMDD}.
 \begin{description}
 \item[Règle 1:] classe = relation, si héritage, les classes filles contiennent l'identifiant de la classe mère comme clè étrangère.
@@ -68,7 +68,7 @@ AlimentsBase(\underline{alimentsBase})
 \regleT{AlimentCompose(\underline{ingredientID\#, alimentsBaseID\#})}
 
 \regleT{AlimentConstitue(\underline{contrainteID\#, alimentsBaseID\#})}
-\newpage
+
 \begin{longtable}{llp{5cm}ll}
   \hline
   \textbf{Classe} & \textbf{Attribut} & \textbf{Description} & \textbf{Type} & \textbf{Contrainte} \\ \endfirsthead \hline
