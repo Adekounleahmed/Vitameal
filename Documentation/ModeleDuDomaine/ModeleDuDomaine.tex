@@ -20,7 +20,7 @@ d'une contre~indications
 ou d'une maladie.
 Les contraintes peuvent porter aussi bien sur l'aliment luis même, que sur sa forme (solide, liquide), sa famille (fruits à coque, crustacès, ...) ou sa texture
 \footnote{\label{textures}Terme métier pour dire si l'on travaille avec des \href{http://plone.vermeil.org:8080/ehpad/Bibliotheque/Memoires/annee-2012-2013/07 - Les textures modifiees et le plaisir de manger de Jacques Caby.pdf}{aliments à texture modifiée} (mixés) ou à texture maintenue (entiers).}.
-Les quatres classes \classe{AlimentsBase}, \classe{Formes}, \classe{Familles} et \classe{Textures} véhicules ces informations. Elles servent aussi à renseigner la classe \classe{Ingredient} qui définit les ingrédients composant un \classe{Plat}. Les quantités misent en oeuvre sont décrites dans la classe~association \classe{ComposantPlat}. Un plat, en plus des ingrédients qui le compose, contient des informations liées à sa fréquence de service: nombre de services (\attribut{nbServices}) maximum ou minimum (\attribut{minMax}) par période (\attribut{periode}).
+Les quatres classes \classe{Ingredient}, \classe{Forme}, \classe{Famille} et \classe{Texture} véhicules ces informations. Elles servent aussi à renseigner la classe \classe{Aliment} qui définit les alimentss composant un \classe{Plat}. Les quantités misent en oeuvre sont décrites dans la classe~association \classe{ComposantPlat}. Un plat, en plus des aliments qui le composent, contient des informations liées à sa fréquence de service: nombre de services (\attribut{nbServices}) maximum ou minimum (\attribut{minMax}) par période (\attribut{periode}).
 La classe \classe{GroupePatients} permet d'avoir la liste des patients qui subissent les mêmes contraintes alimentaires. Il y aura donc autant de menus à faire qu'il y a de groupes de patients.
 
 \subsection{Modèle Logique de Données}
@@ -31,21 +31,15 @@ Le dictionnaire est décrit \autoref{DictionnaireMDD}.
 \regleT{\item[Règle 3:] association plusieurs à plusieurs devient relation avec clé primaire composé des 2 clé primaires des 2 classes en relations.}
 \end{description}
 
-Ingredient(\underline{ingredientID}, nom, \regleD{famille\#}, \regleD{texture\#}, \regleD{forme\#})
+Aliment(\underline{alimentID}, nom, \regleD{famille\#}, \regleD{texture\#}, \regleD{forme\#})
 
-\regleT{ComposantPlat(\underline{ingredientID\#, platID\#}, quantite, unite)}
+\regleT{ComposantPlat(\underline{alimentID\#, platID\#}, quantite, unite)}
 
 Plat(\underline{platID}, nom, categorie, nbServices, periode, minMax)
 
-\regleT{Constituer(\underline{menuID\#, platID\#})}
+\regleT{Constituer(\underline{repasID\#, platID\#})}
 
-Menu(\underline{menuID}, date, \regleD{groupePatientsID\#})
-
-PetitDejeuner(menuID\#)
-
-Dejeuner(menuID\#)
-
-Diner(menuID\#)
+Repas(\underline{repasID}, date, type, \regleD{groupePatientsID\#})
 
 Patient(\underline{patientID}, prenom, nom, sexe, age, poids, taille, service, chambre, \regleD{groupePatientsID\#})
 
@@ -57,45 +51,47 @@ Contrainte(\underline{contrainteID}, nom, nature, \regleD{famille\#}, \regleD{te
 
 GroupePatients(\underline{groupePatientsID}, nom)
 
-Formes(\underline{forme})
+Formes(\underline{formeID}, forme)
 
-Familles(\underline{famille})
+Familles(\underline{familleID}, famille)
 
-Textures(\underline{texture})
+Textures(\underline{textureID}, texture)
 
-AlimentsBase(\underline{alimentsBase})
+Ingredient(\underline{ingredientID}, ingredient)
 
-\regleT{AlimentCompose(\underline{ingredientID\#, alimentsBaseID\#})}
+\regleT{IngredientCompose(\underline{alimentID\#, ingredientID\#})}
 
-\regleT{AlimentConstitue(\underline{contrainteID\#, alimentsBaseID\#})}
+\regleT{IngredientConstitue(\underline{contrainteID\#, ingredientID\#})}
+
+ElementNutritif(\underline{elementID}, element)
+
+\regleT{ComposantIngredient(\underline{elementID\#, ingredientID\#}, teneur)}
 
 \begin{longtable}{llp{5cm}ll}
   \hline
   \textbf{Classe} & \textbf{Attribut} & \textbf{Description} & \textbf{Type} & \textbf{Contrainte} \\ \endfirsthead \hline
   \textbf{Classe} & \textbf{Attribut} & \textbf{Description} & \textbf{Type} & \textbf{Contrainte} \\ \endhead \hline
-  Ingredient & ingredientID & Clé primaire & Integer & Identifiant \\
-  Ingredient & nom & Nom de l'ingredient & String & \\
-  Ingredient & famille & Clé étrangère & Integer & \\
-  Ingredient & texture & Clé étrangère & Integer & \\
-  Ingredient & forme & Clé étrangère & Integer & \\ \hline
-  ComposantPlat & ingredientID & Clé étrangère & Integer & Identifiant \\
+  Aliment & alimentID & Clé primaire & Integer & Identifiant \\
+  Aliment & nom & Nom de l'aliment & String & \\
+  Aliment & famille & Clé étrangère & Integer & \\
+  Aliment & texture & Clé étrangère & Integer & \\
+  Aliment & forme & Clé étrangère & Integer & \\ \hline
+  ComposantPlat & alimentID & Clé étrangère & Integer & Identifiant \\
   ComposantPlat & platID & Clé étrangère & Integer & Identifiant \\
   ComposantPlat & quantite & Quantité d'ingrédient dans le plat & Integer & \\
   ComposantPlat & unite & Unité de mesure de la quantité & String & \\ \hline
   Plat & platID & Clé primaire & Integer & Identifiant \\
   Plat & nom & Nom du plat & String & \\
-  Plat & categorie & Entrée, plat ,dessert, ... & String & \\
+  Plat & categorie & Entrée, plat, dessert, petit déjeuner & String & \\
   Plat & nbServices & Fréquence de service & Integer & \\
   Plat & periode & Période de la fréquence de service & Integer & \\
   Plat & minMax & Fréquence de service min ou max & Boolean & \\ \hline
-  Constituer & menuID & Clé étrangère & Integer & Identifiant \\
+  Constituer & repasID & Clé étrangère & Integer & Identifiant \\
   Constituer & platID & Clé étrangère & Integer & Identifiant \\ \hline
-  Menu & menuID & Clé primaire & Integer & Identifiant \\
-  Menu & date & Date du repas & Date &  \\
-  Menu & groupePatientID &  Groupe de patients auxquels est destiné le menu & Integer & Clé étrangère \\ \hline
-  PetitDejeuner & menuID & Clé étrangère & Integer & Identifiant \\ \hline
-  Dejeuner & menuID & Clé étrangère & Integer & Identifiant \\ \hline
-  Diner & menuID & Clé étrangère & Integer & Identifiant \\ \hline
+  Repas & repasID & Clé primaire & Integer & Identifiant \\
+  Repas & date & Date du repas & Date &  \\
+  Repas & type & Petit déjeuner, déjeuner, diner & Integer \\
+  Repas & groupePatientID &  Groupe de patients auxquels est destiné le repas & Integer & Clé étrangère \\ \hline
   Patient & patientID & Clé primaire & Integer & Identifiant \\
   Patient & prenom & Prénom du patient & String & Non NULL\\
   Patient & nom & Nom du patient & String & Non NULL\\
@@ -111,21 +107,30 @@ AlimentsBase(\underline{alimentsBase})
   Contrainte & contrainteID & Clé primaire & Integer & Identifiant \\
   Contrainte & nom & Nom de la contrainte & String & Non NULL \\
   Contrainte & nature & Nature de la contrainte & Natures & \\
-  Contrainte & famille & Famille de l'ingredient & Familles & \\
-  Contrainte & texture & Texture de l'ingredient & Textures & \\
-  Contrainte & forme & Forme de l'ingredient & Formes & \\ \hline
+  Contrainte & famille & Famille de l'aliment & Familles & \\
+  Contrainte & texture & Texture de l'aliment & Textures & \\
+  Contrainte & forme & Forme de l'aliment & Formes & \\ \hline
   Affecter & groupePatientsID & Clé étrangère & Integer & Identifiant \\
   Affecter & contrainteID & Clé étrangère & Integer & Identifiant \\ \hline
   GroupePatients & groupePatientsID & Clé primaire & Integer & Identifiant \\
   GroupePatients & nom & Nom du groupe de patients & String & \\ \hline
-  Formes & forme & Clé primaire & Integer & Identifiant \\ \hline
-  Familles & famille & Clé primaire & Integer & Identifiant \\ \hline
-  Textures & texture & Clé primaire & Integer & Identifiant \\ \hline
-  AlimentsBase & alimentBase & Clé primaire & String &  \\ \hline
-  AlimentCompose & alimentBase & Clé étrangère & String &  \\
-  AlimentCompose & ingredientID & Clé étrangère & Integer & Identifiant \\ \hline
-  AlimentConstitue & alimentBase & Clé étrangère & String &  \\
-  AlimentConstitue & contrainteID & Clé étrangère & Integer & Identifiant \\ \hline
+  Formes & formeID & Clé primaire & Integer & Identifiant \\
+  Formes & forme & Forme de l'aliment & String & \\ \hline
+  Familles & familleID & Clé primaire & Integer & Identifiant \\
+  Familles & famille & Famille de l'aliment & String & \\ \hline
+  Textures & textureID & Clé primaire & Integer & Identifiant \\
+  Textures & texture & Texture de l'aliment & String & \\ \hline
+  Ingredient & ingredientID & Clé primaire & Integer & Identifiant \\
+  Ingredient & ingredient & Nom de l'ingrédient & String &  \\ \hline
+  IngredientCompose & alimentID & Clé étrangère & Integer & Identifiant \\
+  IngredientCompose & ingredientID & Clé étrangère & Integer & Identifiant \\ \hline
+  IngredientConstitue & ingredientID & Clé étrangère & Integer & Identifiant \\
+  IngredientConstitue & contrainteID & Clé étrangère & Integer & Identifiant \\ \hline
+  ComposantIngredient & ingredientID & Clé étrangère & Integer & Identifiant \\
+  ComposantIngredient & elementID & Clé étrangère & Integer & Identifiant \\
+  ComposantIngredient & teneur & Teneur d'élément nutritif dans un ingrédient (\%) & Integer & \\ \hline
+  ElementNutritif & elementID & Clé primaire & Integer & Identifiant \\
+  ElementNutritif & element & Nomd de l'élément & String &  \\ \hline
 \caption{Dictionnaire}
 \label{DictionnaireMDD}
 \end{longtable}
