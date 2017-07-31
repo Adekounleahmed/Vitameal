@@ -1,11 +1,5 @@
 %-*- coding: utf-8 -*-
 \subsection{Modèle du domaine}
-\begin{figure}
-  \centering
-      \includegraphics[angle=90, scale=0.25]{../../ModeleDuDomaine/ModeleDuDomaine.png} %
-\caption{Modèle du domaine}
-\label{ModeleDuDomaine}
-\end{figure}
 
 \newcommand{\classe}[1]{\emph{\textbf{#1}}}
 \newcommand{\attribut}[1]{\emph{#1}}
@@ -22,6 +16,21 @@ Les contraintes peuvent porter aussi bien sur l'aliment luis même, que sur sa f
 Les quatres classes \classe{Ingredient}, \classe{Forme}, \classe{Famille} et \classe{Texture} véhicules ces informations. Elles servent aussi à renseigner la classe \classe{Aliment} qui définit les aliments composant un \classe{Plat} lesquels servent à la constitution des \classe{Repas}. Les quantités misent en oeuvre sont décrites dans la classe~association \classe{ComposantPlat}. Un plat, en plus des aliments qui le composent, contient des informations liées à sa fréquence de service: nombre de services (\attribut{nbServices}) maximum ou minimum (\attribut{minMax}) par période (\attribut{periode}). Les éléments nutritifs contenus dans les ingrédients sont décrits par la classe \classe{ElementNutritif}; la teneur des ingrédients en éléments nutritifs est décrites par la classe~association \classe{ComposantIngredient}.
 La classe \classe{GroupePatients} permet d'avoir la liste des patients qui subissent les mêmes contraintes alimentaires. Il y aura donc autant de \classe{Repas} à faire qu'il y a de groupes de patients. Les \classe{Repas} pris par un \classe{GroupePatients} sur une période données constituent les \classe{Menu} qui sont donc une classe~association.
 Les \classe{Patient} subissent des \classe{Contrainte} qui sont définies par un \classe{Dietiticien} et validées par un \classe{Medecin} à des dates contenues dans \classe{DateProfilPatient}. La classe \classe{Sejour} répertorie les séjours des \classe{Patient} dans l'établissement.
+
+\afterpage{% Insert after the current page
+\clearpage
+\KOMAoptions{paper=A3,paper=landscape,pagesize}
+%\recalctypearea
+\begin{figure}[p]
+  \centering
+      \includegraphics[scale=0.40]{../../ModeleDuDomaine/ModeleDuDomaine.png} % height=\textheight,width=\textwidth,keepaspectratio
+  \caption{Modèle du domaine}
+  \label{ModeleDuDomaine}
+\end{figure}
+\clearpage
+\KOMAoptions{paper=A4,pagesize}
+%\recalctypearea
+}
 
 \subsection{Modèle Logique de Données}
 Le dictionnaire est décrit \autoref{DictionnaireMDD}.
@@ -69,7 +78,7 @@ ElementNutritif(\underline{elementID}, element)
 
 Medecin(\underline{medecinID}, prenom, nom)
 
-Dieteticien{\underline{dieteticienID}, prenom, nom}
+Dieteticien(\underline{dieteticienID}, prenom, nom)
 
 \regleT{DateProfilPatient(\underline{contrainteID\#, medecinID\#, dieteticienID\#, patientID\#}, dateDieteticien, dateMedecin)}
 
@@ -77,29 +86,32 @@ Sejour(\underline{sejourID}, patientID\#, dateArrive, dateDepart)
 
 \begin{longtable}{llp{5cm}ll}
   \hline
-  \textbf{Classe} & \textbf{Attribut} & \textbf{Description} & \textbf{Type} & \textbf{Contrainte} \\ \endfirsthead \hline
-  \textbf{Classe} & \textbf{Attribut} & \textbf{Description} & \textbf{Type} & \textbf{Contrainte} \\ \endhead \hline
+  \rowcolor{green}\textbf{Classe} & \textbf{Attribut} & \textbf{Description} & \textbf{Type} & \textbf{Contrainte} \\ \endfirsthead \hline
+  \rowcolor{green}\textbf{Classe} & \textbf{Attribut} & \textbf{Description} & \textbf{Type} & \textbf{Contrainte} \\ \endhead \hline
   Aliment & alimentID & Clé primaire & Integer & Identifiant \\
   Aliment & nom & Nom de l'aliment & String & \\
   Aliment & famille & Clé étrangère & Integer & \\
   Aliment & texture & Clé étrangère & Integer & \\
   Aliment & forme & Clé étrangère & Integer & \\ \hline
+
   ComposantPlat & alimentID & Clé étrangère & Integer & Identifiant \\
   ComposantPlat & platID & Clé étrangère & Integer & Identifiant \\
-  ComposantPlat & quantite & Quantité d'ingrédient dans le plat & Integer & \\
+  ComposantPlat & quantite & Quantité d'aliment dans le plat & Integer & \\
   ComposantPlat & unite & Unité de mesure de la quantité & String & \\ \hline
+
   Plat & platID & Clé primaire & Integer & Identifiant \\
   Plat & nom & Nom du plat & String & \\
   Plat & categorie & Entrée, plat, dessert, petit déjeuner & String & \\
   Plat & nbServices & Fréquence de service & Integer & \\
   Plat & periode & Période de la fréquence de service & Integer & \\
   Plat & minMax & Fréquence de service min ou max & Boolean & \\ \hline
+
   Constituer & repasID & Clé étrangère & Integer & Identifiant \\
   Constituer & platID & Clé étrangère & Integer & Identifiant \\ \hline
+
   Repas & repasID & Clé primaire & Integer & Identifiant \\
-  Repas & date & Date du repas & Date &  \\
   Repas & type & Petit déjeuner, déjeuner, diner & Integer \\
-  Repas & groupePatientID &  Groupe de patients auxquels est destiné le repas & Integer & Clé étrangère \\ \hline
+
   Patient & patientID & Clé primaire & Integer & Identifiant \\
   Patient & prenom & Prénom du patient & String & Non NULL\\
   Patient & nom & Nom du patient & String & Non NULL\\
@@ -110,35 +122,68 @@ Sejour(\underline{sejourID}, patientID\#, dateArrive, dateDepart)
   Patient & service & Service dans lequel ce trouve le patient & String & \\
   Patient & chambre & Numéro de chambre du patient & Integer & $> 0$ \\
   Patient & groupePatientID &  Groupe de patients auquels auquel apartient le patient & Integer & Clé étrangère \\ \hline
-  Subir & patientID & Clé étrangère & Integer & Identifiant \\
-  Subir & contrainteID & Clé étrangère & Integer & Identifiant \\ \hline
+
   Contrainte & contrainteID & Clé primaire & Integer & Identifiant \\
   Contrainte & nom & Nom de la contrainte & String & Non NULL \\
   Contrainte & nature & Nature de la contrainte & Natures & \\
   Contrainte & famille & Famille de l'aliment & Familles & \\
   Contrainte & texture & Texture de l'aliment & Textures & \\
   Contrainte & forme & Forme de l'aliment & Formes & \\ \hline
+
   Affecter & groupePatientsID & Clé étrangère & Integer & Identifiant \\
   Affecter & contrainteID & Clé étrangère & Integer & Identifiant \\ \hline
+
   GroupePatients & groupePatientsID & Clé primaire & Integer & Identifiant \\
   GroupePatients & nom & Nom du groupe de patients & String & \\ \hline
+
   Formes & formeID & Clé primaire & Integer & Identifiant \\
   Formes & forme & Forme de l'aliment & String & \\ \hline
+
   Familles & familleID & Clé primaire & Integer & Identifiant \\
   Familles & famille & Famille de l'aliment & String & \\ \hline
+
   Textures & textureID & Clé primaire & Integer & Identifiant \\
   Textures & texture & Texture de l'aliment & String & \\ \hline
+
   Ingredient & ingredientID & Clé primaire & Integer & Identifiant \\
   Ingredient & ingredient & Nom de l'ingrédient & String &  \\ \hline
   IngredientCompose & alimentID & Clé étrangère & Integer & Identifiant \\
   IngredientCompose & ingredientID & Clé étrangère & Integer & Identifiant \\ \hline
   IngredientConstitue & ingredientID & Clé étrangère & Integer & Identifiant \\
   IngredientConstitue & contrainteID & Clé étrangère & Integer & Identifiant \\ \hline
+
   ComposantIngredient & ingredientID & Clé étrangère & Integer & Identifiant \\
   ComposantIngredient & elementID & Clé étrangère & Integer & Identifiant \\
   ComposantIngredient & teneur & Teneur d'élément nutritif dans un ingrédient (\%) & Integer & \\ \hline
+
   ElementNutritif & elementID & Clé primaire & Integer & Identifiant \\
   ElementNutritif & element & Nomd de l'élément & String &  \\ \hline
+
+  Menu & repasID & Clé étangère & Integer & Identifiant \\
+  Menu & groupePatientID & Clé étrangère & Integer & Identifiant \\
+  Menu & date & date du menu & Date & \\
+  Menu & type & petit déjeuner, déjeuner ou diner \\ \hline
+
+  Medecin & medecinID & Clé primaire & Integer & Identifiant \\
+  Medecin & prenom & Prénom du médecin & String & \\
+  Medecin & nom & Nom du médecin & String & \\ \hline
+
+  Dieteticien & dieteticienID & Clé primaire & Integer & Identifiant \\
+  Dieteticien & prenom & Prénom du diététicien & String & \\
+  Dieteticien & nom & Nom du diététicien & String & \\ \hline
+
+  DateProfilPatient & contrainteID & Clé primaire & Integer & Identifiant \\
+  DateProfilPatient & medecinID & Clé étrangère & Integer & \\
+  DateProfilPatient & dieteticienID & Clé étrangère & Integer & \\
+  DateProfilPatient & patientID & Clé étrangère & Integer & \\
+  DateProfilPatient & dateDieteticien & Date de rédaction du rpofil patient & Date & \\
+  DateProfilPatient & dateMedecin & Date de validation du profil patient & Date & \\ \hline
+
+  Sejour & sejourID & Clé étrangère & Integer & Identifiant \\
+  Sejour & patientID & Clé étrangère & Integer & Identifiant \\
+  Sejour & dateArrive & Date de début du séjour & Date & \\
+  Sejour & dateDepart & Date de fin du séjour & Date & \\ \hline
+
 \caption{Dictionnaire}
 \label{DictionnaireMDD}
 \end{longtable}

@@ -1,8 +1,7 @@
 %-*- coding: utf-8 -*-
-\documentclass[11pt,a4paper,twoside,openright]{article}
+\documentclass[11pt,a4paper,oneside]{article} %twoside,openright
 
 \usepackage[utf8]{inputenc}
-%\usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage[francais]{babel}
 \usepackage[babel=true]{csquotes} % csquotes va utiliser la langue définie dans babel
@@ -30,12 +29,16 @@
 \pagestyle{fancy}
 
 \chead{\textbf{VITAMEAL -}}
-\rhead{23 juin 2017}
+\rhead{31 juillet 2017}
 \cfoot{Nicolas SYMPHORIEN, Sonia OTHMANI, Jean-Félix BENITEZ}
 \rfoot{\textbf{CNAM}}%
 \lfoot{\textbf{\thepage/\pageref{LastPage}}}
 \renewcommand{\headrulewidth}{0.4pt}%trait horizontal pour l'entête
 \renewcommand{\footrulewidth}{0.4pt}%trait horizontal pour les pieds de pages
+
+\usepackage{rotfloat}
+\usepackage[paper=A4,pagesize,BCOR=1mm,DIV=17]{typearea}
+\usepackage{afterpage}
 
 \begin{document}
 \input{ModeleDuDomaine}
