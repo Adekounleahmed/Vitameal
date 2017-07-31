@@ -38,7 +38,7 @@ https://pro.anses.fr/TableCIQUAL/
 | 5 | vendredi 12 mai       |    16 |     0.3 |
 | 4 | jeudi     8 juin      |    27 |         |
 | 3 | jeudi     6 juillet   |    28 |     0.5 |
-| 2 | mercredi 19 juillet   |    13 |         |
+| 2 | mercredi 19 juillet   |    13 |     0.6 |
 | 1 | vendredi 21 juillet   |     2 |         |
 | 0 | mercredi 13 septembre |    54 |         |
 |   | jeudi    14 septembre |     1 |         |
