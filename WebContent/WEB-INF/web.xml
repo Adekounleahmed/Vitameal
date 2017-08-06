@@ -69,6 +69,17 @@
 		<url-pattern>/webjars/*</url-pattern>
 	</servlet-mapping>
 
+  <servlet>
+  	<description>Élaboration des menus</description>
+  	<servlet-name>ElaborerMenus</servlet-name>
+  	<servlet-class>com.ipstcnam.vitameal.servlets.ElaborerMenus</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>ElaborerMenus</servlet-name>
+  	<url-pattern>/ElaborerMenus</url-pattern>
+  </servlet-mapping>
+
 	<session-config>
 		<session-timeout>5</session-timeout>
 		<cookie-config>

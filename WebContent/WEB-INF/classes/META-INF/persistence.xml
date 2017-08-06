@@ -6,6 +6,7 @@
              http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="com.ipstcnam.vitameal.jpa">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<!-- Project Properties/JPA/Persistent class management/Discover annotated classes automatically -->
 			<class>com.ipstcnam.vitameal.beans.ProfilPatient</class>
 			<class>com.ipstcnam.vitameal.entity.ComposantPlat</class>
 			<class>com.ipstcnam.vitameal.entity.Ingredient</class>
