@@ -7,7 +7,10 @@ import javax.persistence.Id;
 
 @Entity
 public class Texture {
-	
+	/**
+	 * Maintenue
+	 * Modifiée
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer id;

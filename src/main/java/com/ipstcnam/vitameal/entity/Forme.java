@@ -7,7 +7,11 @@ import javax.persistence.Id;
 
 @Entity
 public class Forme {
-	
+	/**
+	 * Liquide
+	 * Solide
+	 * Gélifiée
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer id;

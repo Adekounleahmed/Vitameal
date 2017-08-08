@@ -5,6 +5,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * Crustacès
+ * Fruits à coque
+ * @version 1.0
+ * @created 09-juil.-2017 11:12:01
+ */
 @Entity
 public class Famille {
 	

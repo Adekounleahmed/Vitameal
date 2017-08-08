@@ -20,9 +20,9 @@ public class Contrainte implements Serializable {
 	private int contrainteID;
 	private Natures nature;
 	private String nom;
-	private Formes forme;
-	private Familles famille;
-	private Textures texture;
+	private Forme forme;
+	private Famille famille;
+	private Texture texture;
 	private List<AlimentsBase> alimentsBase;
 	private List<GroupePatients> affecteGroupePatient;
 
@@ -47,27 +47,27 @@ public class Contrainte implements Serializable {
 		this.nom = nom;
 	}
 
-	public Formes getForme() {
+	public Forme getForme() {
 		return forme;
 	}
 
-	public void setForme(Formes forme) {
+	public void setForme(Forme forme) {
 		this.forme = forme;
 	}
 
-	public Familles getFamille() {
+	public Famille getFamille() {
 		return famille;
 	}
 
-	public void setFamille(Familles famille) {
+	public void setFamille(Famille famille) {
 		this.famille = famille;
 	}
 
-	public Textures getTexture() {
+	public Texture getTexture() {
 		return texture;
 	}
 
-	public void setTexture(Textures texture) {
+	public void setTexture(Texture texture) {
 		this.texture = texture;
 	}
 

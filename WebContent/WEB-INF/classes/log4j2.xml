@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml> <!-- Just to suppress the warning: No grammar constraints (DTD or XML Schema) referenced in the document -->
 <!-- https://logging.apache.org/log4j/2.x/manual/configuration.html -->
-<Configuration status="WARN">
+<!-- Configuration status="ERROR". When this is present log4j2 will output any errors associated with incorrect configuration at runtime. -->
+<Configuration status="ERROR">
   <Appenders>
     <Console name="Console" target="SYSTEM_OUT">
       <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>

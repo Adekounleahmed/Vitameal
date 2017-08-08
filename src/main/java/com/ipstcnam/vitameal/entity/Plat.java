@@ -29,7 +29,7 @@ public class Plat implements Serializable {
 
 	private Integer periode;
 
-	private boolean maximum;
+	private boolean minMax;
 
 	@OneToMany(mappedBy = "plat")
 	private Collection<ComposantPlat> composantPlats;
@@ -75,11 +75,11 @@ public class Plat implements Serializable {
 	}
 
 	public boolean isMaximum() {
-		return maximum;
+		return minMax;
 	}
 
 	public void setMaximum(boolean maximum) {
-		this.maximum = maximum;
+		this.minMax = maximum;
 	}
 
 }

@@ -30,7 +30,7 @@ public class ElaborationMenus {
 
 	public ElaborationMenus(){
 		menus = new MenuDAO();
-		plats = new PlatDao();
+		plats = new PlatDao(null);
 		menuElabore = new Menu();
 	}
 	
