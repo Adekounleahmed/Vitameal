@@ -2,6 +2,7 @@ package com.ipstcnam.vitameal.entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,7 +10,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ForeignKey;
 
 import com.ipstcnam.vitameal.beans.enums.MinMax;
 
@@ -20,22 +25,22 @@ import com.ipstcnam.vitameal.beans.enums.MinMax;
  */
 @Entity
 public class Plat implements Serializable {
-
 	private static final long serialVersionUID = -8641846010466974430L;
 
+	private String categorie;
+	@Enumerated(EnumType.STRING)
+	private MinMax minMax;
+	private Integer nombreService;
+	private String nom;
+	private Integer periode;
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer platID;
-
-	private String nom;
-
-	private Integer nombreService;
-
-	private Integer periode;
-	@Enumerated(EnumType.STRING)
-	private MinMax minMax;
-	
-	private String categorie;
+	@ManyToMany
+	@JoinTable(name="Constituer",
+		joinColumns=@JoinColumn(name="platID", foreignKey=@ForeignKey(name="FK_Plat_Constituer"), nullable=false),
+		inverseJoinColumns=@JoinColumn(name="repasID", foreignKey=@ForeignKey(name="FK_Repas_Constituer"), nullable=false))
+	private List<Repas> constitue;
 
 	@OneToMany(mappedBy = "plat")
 	private Collection<ComposantPlat> composantPlats;
@@ -98,5 +103,13 @@ public class Plat implements Serializable {
 
 	public void setCategorie(String uneCategorie) {
 		categorie = uneCategorie;
+	}
+
+	public List<Repas> getConstitue() {
+		return constitue;
+	}
+
+	public void setConstitue(List<Repas> desRepas) {
+		constitue = desRepas;
 	}
 }

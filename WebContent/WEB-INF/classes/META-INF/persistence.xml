@@ -12,6 +12,10 @@
 			<class>com.ipstcnam.vitameal.entity.Aliment</class>
 			<class>com.ipstcnam.vitameal.entity.Plat</class>
 			<class>com.ipstcnam.vitameal.entity.pk.ComposantPlatPK</class>
+			<class>com.ipstcnam.vitameal.entity.Menu</class>
+			<class>com.ipstcnam.vitameal.entity.pk.MenuPK</class>
+			<class>com.ipstcnam.vitameal.entity.Dateprofilpatient</class>
+			<class>com.ipstcnam.vitameal.entity.pk.DateprofilpatientPK</class>
 		<properties>
 			<!-- PROPRIETES STANDARDS JPA -->
  			<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>

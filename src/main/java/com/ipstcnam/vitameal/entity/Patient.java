@@ -23,7 +23,7 @@ public class Patient implements Serializable {
 	private String nom;
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	private int patientID;
+	private Integer patientID;
 	private int poids;
 	private String prenom;
 	private String service;
@@ -66,11 +66,11 @@ public class Patient implements Serializable {
 		this.nom = nom;
 	}
 
-	public int getPatientID() {
+	public Integer getPatientID() {
 		return patientID;
 	}
 
-	public void setPatientID(int id) {
+	public void setPatientID(Integer id) {
 		patientID = id;
 	}
 

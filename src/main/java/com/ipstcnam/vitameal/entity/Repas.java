@@ -1,11 +1,13 @@
 package com.ipstcnam.vitameal.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -18,18 +20,20 @@ public class Repas implements Serializable {
 	private static final long serialVersionUID = 915272151586418923L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	private int repasID;
+	private Integer repasID;
 	private int typeRepas;
+	@ManyToMany(mappedBy="constitue")
+	private List<Plat> estConstitue;
 
 	public Repas() {
 		// Constructeur par defaut
 	}
 
-	public int getRepasID() {
+	public Integer getRepasID() {
 		return repasID;
 	}
 
-	public void setRepasID(int id) {
+	public void setRepasID(Integer id) {
 		repasID = id;
 	}
 
@@ -39,5 +43,13 @@ public class Repas implements Serializable {
 
 	public void setTypeRepas(int unTypeRepas) {
 		typeRepas = unTypeRepas;
+	}
+
+	public List<Plat> getEstConstitue() {
+		return estConstitue;
+	}
+
+	public void setEstConstitue(List<Plat> desPlats) {
+		estConstitue = desPlats;
 	}
 }

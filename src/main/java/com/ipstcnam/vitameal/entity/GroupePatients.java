@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -20,10 +21,10 @@ public class GroupePatients implements Serializable {
 	private static final long serialVersionUID = -611125065500023143L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	private int groupePatientsID;
+	private Integer groupePatientsID;
 	private String nom;
-	//private List<Patient> estFormeParPatient;
-	//private List<Contrainte> estAffecteParContrainte;
+	@ManyToMany(mappedBy="affecte")
+	private List<Contrainte> estAffectePar;
 	@OneToMany
 	@JoinColumn(name="groupePatientsID")
 	private List<Repas> consommeRepas;
@@ -37,11 +38,11 @@ public class GroupePatients implements Serializable {
 		groupePatientsID = unID;
 	}
 
-	public void setGroupePatientsID(int id) {
+	public void setGroupePatientsID(Integer id) {
 		groupePatientsID = id;
 	}
 	
-	public int getGroupePatientsID() {
+	public Integer getGroupePatientsID() {
 		return groupePatientsID;
 	}
 	
@@ -52,23 +53,15 @@ public class GroupePatients implements Serializable {
 	public String getNom() {
 		return nom;
 	}
-/*
-	public List<Patient> getEstFormeParPatient() {
-		return estFormeParPatient;
+
+	public List<Contrainte> getEstAffectePar() {
+		return estAffectePar;
 	}
 
-	public void setEstFormeParPatient(List<Patient> estFormeParPatient) {
-		this.estFormeParPatient = estFormeParPatient;
+	public void setEstAffectePar(List<Contrainte> desContraintes) {
+		estAffectePar = desContraintes;
 	}
 
-	public List<Contrainte> getEstAffecteParContrainte() {
-		return estAffecteParContrainte;
-	}
-
-	public void setEstAffecteParContrainte(List<Contrainte> estAffecteParContrainte) {
-		this.estAffecteParContrainte = estAffecteParContrainte;
-	}
-*/
 	public List<Repas> getConsommeRepas() {
 		return consommeRepas;
 	}

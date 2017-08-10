@@ -6,10 +6,8 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
 
 import com.ipstcnam.vitameal.beans.enums.UniteIngredient;
 import com.ipstcnam.vitameal.entity.pk.ComposantPlatPK;
