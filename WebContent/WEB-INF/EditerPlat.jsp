@@ -43,7 +43,7 @@
 
 		<form method="post" action="/VitApp/Plats">
 			<input name="action" value="${param.action}" type="hidden">
-			<input name="p_idPlat" value="${plat.id}"  type="hidden">
+			<input name="p_idPlat" value="${plat.platID}"  type="hidden">
 			<label for="nomPlat">Nom du nouveau plat:</label>
 			<input type="text" id="nomPlat" name="p_nomPlat" value="${plat.nom}" required /> <br>
 			<fieldset id="composantPlatFieldSet">

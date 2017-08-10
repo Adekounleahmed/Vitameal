@@ -41,16 +41,16 @@
 			<c:forEach var="plat" items="${plats}">
 				<tr>
 					<td>${plat.nom}</td>
-					<td>${plat.id}</td>
+					<td>${plat.platID}</td>
 					<td>
 					
 					<c:url var="urlEditerPlat" value="Plats">
 						<c:param name="action" value="editer" />
-						<c:param name="id" value="${plat.id}" />
+						<c:param name="id" value="${plat.platID}" />
 					</c:url>
 					<a href="${urlEditerPlat}">Editer</a></td>
 					
-					<td><input value="Supprimer" onclick="supprimerPlat('${plat.id}')" type="button"></td>
+					<td><input value="Supprimer" onclick="supprimerPlat('${plat.platID}')" type="button"></td>
 				</tr>
 			</c:forEach>
 		</table>
