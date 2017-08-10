@@ -26,7 +26,7 @@ public class GroupePatients implements Serializable {
 	//private List<Contrainte> estAffecteParContrainte;
 	@OneToMany
 	@JoinColumn(name="groupePatientsID")
-	private List<Menu> consommeMenu;
+	private List<Repas> consommeRepas;
 
 	public GroupePatients(){
 		nom = "";
@@ -37,6 +37,10 @@ public class GroupePatients implements Serializable {
 		groupePatientsID = unID;
 	}
 
+	public void setGroupePatientsID(int id) {
+		groupePatientsID = id;
+	}
+	
 	public int getGroupePatientsID() {
 		return groupePatientsID;
 	}
@@ -65,11 +69,11 @@ public class GroupePatients implements Serializable {
 		this.estAffecteParContrainte = estAffecteParContrainte;
 	}
 */
-	public List<Menu> getConsommeMenu() {
-		return consommeMenu;
+	public List<Repas> getConsommeRepas() {
+		return consommeRepas;
 	}
 
-	public void setConsommeMenu(List<Menu> consommeMenu) {
-		this.consommeMenu = consommeMenu;
+	public void setConsommeRepas(List<Repas> consommeRepas) {
+		this.consommeRepas = consommeRepas;
 	}
 }

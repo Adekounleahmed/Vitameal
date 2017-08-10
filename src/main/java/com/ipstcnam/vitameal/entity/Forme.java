@@ -1,17 +1,16 @@
 package com.ipstcnam.vitameal.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Forme {
-	/**
-	 * Liquide
-	 * Solide
-	 * Gélifiée
-	 */
+public class Forme implements Serializable {
+	private static final long serialVersionUID = -5892969467937184732L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer id;

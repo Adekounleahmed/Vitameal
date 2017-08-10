@@ -11,7 +11,7 @@ import javax.persistence.Query;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.ipstcnam.vitameal.entity.Menu;
+import com.ipstcnam.vitameal.entity.Repas;
 import com.ipstcnam.vitameal.listeners.ApplicationListener;
 
 /**
@@ -29,7 +29,7 @@ public class MenuDAO implements Serializable {
 		em = ApplicationListener.getEmf().createEntityManager();
 	}
 
-	public void creer(Menu leMenu) {
+	public void creer(Repas leMenu) {
 		em.getTransaction().begin();
 		try {
 			em.persist(leMenu);
@@ -44,8 +44,8 @@ public class MenuDAO implements Serializable {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Menu> menus() {
-		String jpqlQuery = "select menus from Menu menus";
+	public List<Repas> repas() {
+		String jpqlQuery = "select menus from Repas menus";
 		Query query = em.createQuery(jpqlQuery);
 		return query.getResultList();
 	}

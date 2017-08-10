@@ -1,12 +1,15 @@
 package com.ipstcnam.vitameal.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.ipstcnam.vitameal.beans.enums.Genre;
 
 /**
  * @version 1.0
@@ -24,9 +27,9 @@ public class Patient implements Serializable {
 	private int poids;
 	private String prenom;
 	private String service;
-	private boolean sexe;
+	@Enumerated(EnumType.STRING)
+	private Genre sexe;
 	private int taille;
-	private List<Contrainte> subitContrainte;
 	private GroupePatients formeGroupePatient;
 
 	public Patient(){
@@ -63,6 +66,14 @@ public class Patient implements Serializable {
 		this.nom = nom;
 	}
 
+	public int getPatientID() {
+		return patientID;
+	}
+
+	public void setPatientID(int id) {
+		patientID = id;
+	}
+
 	public int getPoids() {
 		return poids;
 	}
@@ -87,11 +98,11 @@ public class Patient implements Serializable {
 		this.service = service;
 	}
 
-	public boolean isSexe() {
+	public Genre getSexe() {
 		return sexe;
 	}
 
-	public void setSexe(boolean sexe) {
+	public void setSexe(Genre sexe) {
 		this.sexe = sexe;
 	}
 
@@ -101,14 +112,6 @@ public class Patient implements Serializable {
 
 	public void setTaille(int taille) {
 		this.taille = taille;
-	}
-
-	public List<Contrainte> getSubitContrainte() {
-		return subitContrainte;
-	}
-
-	public void setSubitContrainte(List<Contrainte> subitContrainte) {
-		this.subitContrainte = subitContrainte;
 	}
 
 	public GroupePatients getFormeGroupePatient() {

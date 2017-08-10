@@ -1,12 +1,15 @@
 package com.ipstcnam.vitameal.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.ipstcnam.vitameal.beans.enums.Nature;
 
 /**
  * @version 1.0
@@ -18,25 +21,32 @@ public class Contrainte implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int contrainteID;
-	private Natures nature;
+	@Enumerated(EnumType.STRING)
+	private Nature nature;
 	private String nom;
 	private Forme forme;
 	private Famille famille;
 	private Texture texture;
-	private List<AlimentsBase> alimentsBase;
-	private List<GroupePatients> affecteGroupePatient;
 
 	public Contrainte(){
-		nature = Natures.Maladie;
+		nature = Nature.Ma;
 		nom = "";
 	}
 
-	public Natures getNature() {
+	public Nature getNature() {
 		return nature;
 	}
 
-	public void setNature(Natures nature) {
+	public void setNature(Nature nature) {
 		this.nature = nature;
+	}
+
+	public int getContrainteID() {
+		return contrainteID;
+	}
+
+	public void setContrainteID(int id) {
+		contrainteID = id;
 	}
 
 	public String getNom() {
@@ -69,21 +79,5 @@ public class Contrainte implements Serializable {
 
 	public void setTexture(Texture texture) {
 		this.texture = texture;
-	}
-
-	public List<AlimentsBase> getAlimentsBase() {
-		return alimentsBase;
-	}
-
-	public void setAlimentsBase(List<AlimentsBase> alimentsBase) {
-		this.alimentsBase = alimentsBase;
-	}
-
-	public List<GroupePatients> getAffecteGroupePatient() {
-		return affecteGroupePatient;
-	}
-
-	public void setAffecteGroupePatient(List<GroupePatients> affecteGroupePatient) {
-		this.affecteGroupePatient = affecteGroupePatient;
 	}
 }

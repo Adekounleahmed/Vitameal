@@ -74,7 +74,7 @@ public class PlatForm {
 	private void validateIngredientParameter(String[] idIngredient, String[] nomIngredients,
 			String[] quantiteIngredients, String[] uniteIngredients) throws MalformedFormException {
 		MalformedFormException exception = new MalformedFormException(
-				"Il n'y as pas le bon nombre de parametre pour les ingredient");
+				"Il n'y as pas le bon nombre de parametre pour les aliment");
 		
 		if (idIngredient == null || nomIngredients == null || quantiteIngredients == null || uniteIngredients == null) {
 			throw exception;

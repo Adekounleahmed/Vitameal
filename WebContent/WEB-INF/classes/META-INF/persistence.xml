@@ -9,7 +9,7 @@
 		<!-- Project Properties/JPA/Persistent class management/Discover annotated classes automatically -->
 			<class>com.ipstcnam.vitameal.beans.ProfilPatient</class>
 			<class>com.ipstcnam.vitameal.entity.ComposantPlat</class>
-			<class>com.ipstcnam.vitameal.entity.Ingredient</class>
+			<class>com.ipstcnam.vitameal.entity.Aliment</class>
 			<class>com.ipstcnam.vitameal.entity.Plat</class>
 			<class>com.ipstcnam.vitameal.entity.pk.ComposantPlatPK</class>
 		<properties>

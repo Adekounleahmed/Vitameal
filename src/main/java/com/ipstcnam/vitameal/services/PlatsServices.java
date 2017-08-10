@@ -3,7 +3,7 @@ package com.ipstcnam.vitameal.services;
 import java.util.List;
 
 import com.ipstcnam.vitameal.entity.ComposantPlat;
-import com.ipstcnam.vitameal.entity.Ingredient;
+import com.ipstcnam.vitameal.entity.Aliment;
 import com.ipstcnam.vitameal.entity.Plat;
 import com.ipstcnam.vitameal.forms.PlatForm;
 
@@ -15,6 +15,6 @@ public interface PlatsServices {
 	
 	public Plat consulterPlat(Integer idPlat);
 	public List<ComposantPlat> consulterComposantsPlat(Integer idPlat);
-	public List<Ingredient> consulterIngredientsPlat(Integer idPlat);
-	public List<Ingredient> consulterIngredients();
+	public List<Aliment> consulterIngredientsPlat(Integer idPlat);
+	public List<Aliment> consulterIngredients();
 }

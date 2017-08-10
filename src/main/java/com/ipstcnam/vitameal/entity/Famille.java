@@ -1,19 +1,22 @@
 package com.ipstcnam.vitameal.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- * Crustacès
- * Fruits à coque
+ * CrustacÃ©s
+ * Fruits Ã  coque
  * @version 1.0
  * @created 09-juil.-2017 11:12:01
  */
 @Entity
-public class Famille {
-	
+public class Famille implements Serializable {
+	private static final long serialVersionUID = 6727950214310787991L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer id;

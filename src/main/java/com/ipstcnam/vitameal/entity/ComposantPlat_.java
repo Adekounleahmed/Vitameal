@@ -11,7 +11,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 public class ComposantPlat_ {
 	public static volatile SingularAttribute<ComposantPlat, ComposantPlatPK> pk;
 	public static volatile SingularAttribute<ComposantPlat, Plat> plat;
-	public static volatile SingularAttribute<ComposantPlat, Ingredient> ingredient;
+	public static volatile SingularAttribute<ComposantPlat, Aliment> aliment;
 	public static volatile SingularAttribute<ComposantPlat, Float> quantite;
 	public static volatile SingularAttribute<ComposantPlat, UniteIngredient> unite;
 }

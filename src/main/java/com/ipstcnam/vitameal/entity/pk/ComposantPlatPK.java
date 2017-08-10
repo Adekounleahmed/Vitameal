@@ -5,14 +5,14 @@ import java.io.Serializable;
 import javax.persistence.Embeddable;
 
 import com.ipstcnam.vitameal.entity.ComposantPlat;
-import com.ipstcnam.vitameal.entity.Ingredient;
+import com.ipstcnam.vitameal.entity.Aliment;
 import com.ipstcnam.vitameal.entity.Plat;
 
 /**
  * Clé composite de l'entité ComposantPlat entre un ingrédient et un plat.
  * 
  * @see ComposantPlat
- * @see Ingredient
+ * @see Aliment
  * @see Plat
  * 
  * @author Nicolas Symphorien

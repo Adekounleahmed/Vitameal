@@ -13,11 +13,11 @@ import javax.persistence.criteria.Root;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.ipstcnam.vitameal.entity.Ingredient;
+import com.ipstcnam.vitameal.entity.Aliment;
 import com.ipstcnam.vitameal.entity.Plat;
 
 /**
- * DAO des entités {@link Ingredient}.
+ * DAO des entités {@link Aliment}.
  * 
  * @author Nicolas Symphorien
  *
@@ -35,10 +35,10 @@ public class IngredientDao implements Serializable {
 		this.em = em;
 	}
 	
-	public void creer(Ingredient ingredient) {
+	public void creer(Aliment aliment) {
 		em.getTransaction().begin();
 		try {
-			em.persist(ingredient);
+			em.persist(aliment);
 			em.getTransaction().commit();
 		} catch(Exception e) {
 			em.getTransaction().rollback();
@@ -46,10 +46,10 @@ public class IngredientDao implements Serializable {
 		}
 	}
 
-	public void update(Ingredient ingredient) {
+	public void update(Aliment aliment) {
 		em.getTransaction().begin();
 		try {
-			em.merge(ingredient);
+			em.merge(aliment);
 			em.getTransaction().commit();
 		} catch(Exception e) {
 			em.getTransaction().rollback();
@@ -57,18 +57,18 @@ public class IngredientDao implements Serializable {
 		}
 	}
 
-	public Ingredient findById(Integer idIngredient) {
-		return em.find(Ingredient.class, idIngredient);
+	public Aliment findById(Integer idIngredient) {
+		return em.find(Aliment.class, idIngredient);
 	}
 
-	public List<Ingredient> findAll() {
+	public List<Aliment> findAll() {
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 		
-		CriteriaQuery<Ingredient> criteriaQuery = criteriaBuilder.createQuery(Ingredient.class);
-		Root<Ingredient> ingredientRoot = criteriaQuery.from(Ingredient.class);
+		CriteriaQuery<Aliment> criteriaQuery = criteriaBuilder.createQuery(Aliment.class);
+		Root<Aliment> ingredientRoot = criteriaQuery.from(Aliment.class);
 		criteriaQuery.select(ingredientRoot);
 		
-		TypedQuery<Ingredient> typedQuery = em.createQuery(criteriaQuery);		
+		TypedQuery<Aliment> typedQuery = em.createQuery(criteriaQuery);		
 		return typedQuery.getResultList();
 	}
 

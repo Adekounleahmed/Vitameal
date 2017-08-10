@@ -17,15 +17,15 @@ import com.ipstcnam.vitameal.entity.pk.ComposantPlatPK;
 /**
  * <p>
  * Cette classe représente un composant d'un plat. Elle correspond à une
- * association entre un plat et un ingrédient et donne la quantité en une unité
- * de mesure de cet ingrédient dans le plat.
+ * association entre un plat et un aliment et donne la quantité en une unité
+ * de mesure de cet aliment dans le plat.
  * </p>
  * <p>
  * L'identifiant de cette entité une clé composite entre un plat et un
- * ingrédient ({@link ComposantPlatPK}).
+ * aliment ({@link ComposantPlatPK}).
  * </p>
  * 
- * @see Ingredient
+ * @see Aliment
  * @see Plat
  * 
  * @author Nicolas Symphorien
@@ -38,13 +38,13 @@ public class ComposantPlat implements Serializable {
 	@EmbeddedId
 	private ComposantPlatPK pk = new ComposantPlatPK();
 
-	@MapsId("platId")
+	@MapsId("platID")
 	@ManyToOne
 	private Plat plat;
 
-	@MapsId("ingredientId")
+	@MapsId("alimentID")
 	@ManyToOne
-	private Ingredient ingredient;
+	private Aliment aliment;
 
 	private float quantite;
 
@@ -83,12 +83,12 @@ public class ComposantPlat implements Serializable {
 		this.plat = plat;
 	}
 
-	public Ingredient getIngredient() {
-		return ingredient;
+	public Aliment getIngredient() {
+		return aliment;
 	}
 
-	public void setIngredient(Ingredient ingredient) {
-		this.ingredient = ingredient;
+	public void setIngredient(Aliment aliment) {
+		this.aliment = aliment;
 	}
 
 	@Override

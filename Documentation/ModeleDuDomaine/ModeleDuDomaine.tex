@@ -14,7 +14,7 @@ ou d'une maladie.
 Les contraintes peuvent porter aussi bien sur l'aliment luis même, que sur sa forme (solide, liquide), sa famille (fruits à coque, crustacès, ...) ou sa texture
 \footnote{\label{textures}Terme métier pour dire si l'on travaille avec des \href{http://plone.vermeil.org:8080/ehpad/Bibliotheque/Memoires/annee-2012-2013/07 - Les textures modifiees et le plaisir de manger de Jacques Caby.pdf}{aliments à texture modifiée} (mixés) ou à texture maintenue (entiers).}.
 Les quatres classes \classe{Ingredient}, \classe{Forme}, \classe{Famille} et \classe{Texture} véhicules ces informations. Elles servent aussi à renseigner la classe \classe{Aliment} qui définit les aliments composant un \classe{Plat} lesquels servent à la constitution des \classe{Repas}. Les quantités misent en oeuvre sont décrites dans la classe~association \classe{ComposantPlat}. Un plat, en plus des aliments qui le composent, contient des informations liées à sa fréquence de service: nombre de services (\attribut{nbServices}) maximum ou minimum (\attribut{minMax}) par période (\attribut{periode}). Les éléments nutritifs contenus dans les ingrédients sont décrits par la classe \classe{ElementNutritif}; la teneur des ingrédients en éléments nutritifs est décrites par la classe~association \classe{ComposantIngredient}.
-La classe \classe{GroupePatients} permet d'avoir la liste des patients qui subissent les mêmes contraintes alimentaires. Il y aura donc autant de \classe{Repas} à faire qu'il y a de groupes de patients. Les \classe{Repas} pris par un \classe{GroupePatients} sur une période données constituent les \classe{Menu} qui sont donc une classe~association.
+La classe \classe{GroupePatients} permet d'avoir la liste des patients qui subissent les mêmes contraintes alimentaires. Il y aura donc autant de \classe{Repas} à faire qu'il y a de groupes de patients. Les \classe{Repas} (petit déjeuner, déjeuner ou diner) pris par un \classe{GroupePatients} sur une période données constituent les \classe{Menu} qui sont donc une classe~association. Les menus ont donc pour une date donnée, trois repas: petit déjeuner, déjeuner et diner.
 Les \classe{Patient} subissent des \classe{Contrainte} qui sont définies par un \classe{Dietiticien} et validées par un \classe{Medecin} à des dates contenues dans \classe{DateProfilPatient}. La classe \classe{Sejour} répertorie les séjours des \classe{Patient} dans l'établissement.
 
 \afterpage{% Insert after the current page
@@ -74,7 +74,7 @@ ElementNutritif(\underline{elementID}, element)
 
 \regleT{ComposantIngredient(\underline{elementID\#, ingredientID\#}, teneur)}
 
-\regleT{Menu(\underline{repasID\#, groupePatientID\#}, date, type)}
+\regleT{Menu(\underline{repasID\#, groupePatientID\#}, date)}
 
 Medecin(\underline{medecinID}, prenom, nom)
 
@@ -162,7 +162,6 @@ Sejour(\underline{sejourID}, patientID\#, dateArrive, dateDepart)
   Menu & repasID & Clé étangère & Integer & Identifiant \\
   Menu & groupePatientID & Clé étrangère & Integer & Identifiant \\
   Menu & date & date du menu & Date & \\
-  Menu & type & petit déjeuner, déjeuner ou diner \\ \hline
 
   Medecin & medecinID & Clé primaire & Integer & Identifiant \\
   Medecin & prenom & Prénom du médecin & String & \\

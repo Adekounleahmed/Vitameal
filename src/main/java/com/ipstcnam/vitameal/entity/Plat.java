@@ -4,13 +4,17 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.ipstcnam.vitameal.beans.enums.MinMax;
+
 /**
- * Cette classe représente un plat utilisé dans les menus.
+ * Cette classe représente un plat utilisé dans les repas.
  * 
  * @author Nicolas Symphorien
  */
@@ -21,25 +25,27 @@ public class Plat implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Integer id;
+	private Integer platID;
 
 	private String nom;
 
 	private Integer nombreService;
 
 	private Integer periode;
-
-	private boolean minMax;
+	@Enumerated(EnumType.STRING)
+	private MinMax minMax;
+	
+	private String categorie;
 
 	@OneToMany(mappedBy = "plat")
 	private Collection<ComposantPlat> composantPlats;
 
-	public Integer getId() {
-		return id;
+	public Integer getPlatID() {
+		return platID;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setPlatID(Integer id) {
+		this.platID = id;
 	}
 
 	public String getNom() {
@@ -75,11 +81,22 @@ public class Plat implements Serializable {
 	}
 
 	public boolean isMaximum() {
+		return minMax == MinMax.Max;
+	}
+
+	public MinMax getMinMax() {
 		return minMax;
 	}
 
-	public void setMaximum(boolean maximum) {
-		this.minMax = maximum;
+	public void setMinMax(MinMax maximum) {
+		minMax = maximum;
 	}
 
+	public String getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(String uneCategorie) {
+		categorie = uneCategorie;
+	}
 }

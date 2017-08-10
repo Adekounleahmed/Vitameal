@@ -9,7 +9,7 @@ import com.ipstcnam.vitameal.dao.ComposantPlatDao;
 import com.ipstcnam.vitameal.dao.IngredientDao;
 import com.ipstcnam.vitameal.dao.PlatDao;
 import com.ipstcnam.vitameal.entity.ComposantPlat;
-import com.ipstcnam.vitameal.entity.Ingredient;
+import com.ipstcnam.vitameal.entity.Aliment;
 import com.ipstcnam.vitameal.entity.Plat;
 import com.ipstcnam.vitameal.entity.pk.ComposantPlatPK;
 import com.ipstcnam.vitameal.forms.LigneIngredient;
@@ -40,13 +40,13 @@ public class PlatsServicesImpl implements PlatsServices {
 		for (int i = 0; i < platForm.numberOfLigneIngredient(); i++) {
 			LigneIngredient ligneIngredient = platForm.getLigneIngredients(i);
 			
-			Ingredient ingredient = new Ingredient();
-			ingredient.setNom(ligneIngredient.getNomIngredient());
-			ingredientDao.creer(ingredient);
+			Aliment aliment = new Aliment();
+			aliment.setNom(ligneIngredient.getNomIngredient());
+			ingredientDao.creer(aliment);
 			
 			ComposantPlat composantPlat = new ComposantPlat();
 			composantPlat.setPlat(plat);
-			composantPlat.setIngredient(ingredient);
+			composantPlat.setIngredient(aliment);
 			composantPlat.setQuantite(ligneIngredient.getQuantiteIngredient());
 			composantPlat.setUnite(ligneIngredient.getUniteIngredient());
 			composantPlatDao.creer(composantPlat);
@@ -56,7 +56,7 @@ public class PlatsServicesImpl implements PlatsServices {
 	@Override
 	public void modifierPlat(PlatForm platForm) {
 		for (ComposantPlat composantPlat : composantPlatDao.findByPlatId(platForm.getIdPlat())) {
-			Integer idIngredient = composantPlat.getIngredient().getId();
+			Integer idIngredient = composantPlat.getIngredient().getAlimentID();
 			if (!platForm.contain(idIngredient)) {
 				composantPlatDao.delete(composantPlat);
 			}
@@ -73,15 +73,15 @@ public class PlatsServicesImpl implements PlatsServices {
 			LigneIngredient ligneIngredient = platForm.getLigneIngredients(i);
 			
 			if (ligneIngredient.getIdIngredient() != null) {
-				Ingredient ingredient = ingredientDao.findById(ligneIngredient.getIdIngredient());
-				if (!ingredient.getNom().equals(ligneIngredient.getNomIngredient())) {
-					ingredient.setNom(ligneIngredient.getNomIngredient());
-					ingredientDao.update(ingredient);
+				Aliment aliment = ingredientDao.findById(ligneIngredient.getIdIngredient());
+				if (!aliment.getNom().equals(ligneIngredient.getNomIngredient())) {
+					aliment.setNom(ligneIngredient.getNomIngredient());
+					ingredientDao.update(aliment);
 				}
 				
 				ComposantPlatPK composantPlatPK = new ComposantPlatPK();
-				composantPlatPK.setIngredientId(ingredient.getId());
-				composantPlatPK.setPlatId(plat.getId());
+				composantPlatPK.setIngredientId(aliment.getAlimentID());
+				composantPlatPK.setPlatId(plat.getPlatID());
 				ComposantPlat composantPlat = composantPlatDao.findByPk(composantPlatPK);
 				
 				if (composantPlat.getQuantite() != ligneIngredient.getQuantiteIngredient()) {
@@ -94,13 +94,13 @@ public class PlatsServicesImpl implements PlatsServices {
 				}
 				
 			} else {
-				Ingredient ingredient = new Ingredient();
-				ingredient.setNom(ligneIngredient.getNomIngredient());
-				ingredientDao.creer(ingredient);
+				Aliment aliment = new Aliment();
+				aliment.setNom(ligneIngredient.getNomIngredient());
+				ingredientDao.creer(aliment);
 				
 				ComposantPlat composantPlat = new ComposantPlat();
 				composantPlat.setPlat(plat);
-				composantPlat.setIngredient(ingredient);
+				composantPlat.setIngredient(aliment);
 				composantPlat.setQuantite(ligneIngredient.getQuantiteIngredient());
 				composantPlat.setUnite(ligneIngredient.getUniteIngredient());
 				composantPlatDao.creer(composantPlat);
@@ -138,12 +138,12 @@ public class PlatsServicesImpl implements PlatsServices {
 	}
 
 	@Override
-	public List<Ingredient> consulterIngredientsPlat(Integer idPlat) {
+	public List<Aliment> consulterIngredientsPlat(Integer idPlat) {
 		return null; //TODO
 	}
 
 	@Override
-	public List<Ingredient> consulterIngredients() {
+	public List<Aliment> consulterIngredients() {
 		return ingredientDao.findAll();
 	}
 

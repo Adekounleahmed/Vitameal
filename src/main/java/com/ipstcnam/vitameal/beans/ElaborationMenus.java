@@ -13,7 +13,7 @@ import com.ipstcnam.vitameal.dao.GroupePatientsDAO;
 import com.ipstcnam.vitameal.dao.MenuDAO;
 import com.ipstcnam.vitameal.dao.PlatDao;
 import com.ipstcnam.vitameal.entity.GroupePatients;
-import com.ipstcnam.vitameal.entity.Menu;
+import com.ipstcnam.vitameal.entity.Repas;
 import com.ipstcnam.vitameal.entity.Plat;
 
 /**
@@ -25,18 +25,18 @@ public class ElaborationMenus {
 
 	private MenuDAO menus;
 	private PlatDao plats;
-	private Menu menuElabore;
+	private Repas menuElabore;
     private static final Logger logger = LogManager.getLogger(MenuDAO.class);
 
 	public ElaborationMenus(){
 		menus = new MenuDAO();
 		plats = new PlatDao(null);
-		menuElabore = new Menu();
+		menuElabore = new Repas();
 	}
 	
-	public Menu elaborerMenu(GroupePatients leGroupePatients, Date laDate, int leMenu) {
+	public Repas elaborerMenu(GroupePatients leGroupePatients, Date laDate, int leMenu) {
 		List<Plat> lesPlats = plats.findAll();
-		logger.info("GP : " + leGroupePatients.getNom() + " Date : " + laDate + " Menu : " + leMenu);
+		logger.info("GP : " + leGroupePatients.getNom() + " Date : " + laDate + " Repas : " + leMenu);
 		return menuElabore;
 	}
 
