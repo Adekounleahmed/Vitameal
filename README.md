@@ -40,7 +40,7 @@ https://pro.anses.fr/TableCIQUAL/
 | 3 | jeudi     6 juillet   |    28 |     0.5 |
 | 2 | mercredi 19 juillet   |    13 |     0.6 |
 | 1 | vendredi 21 juillet   |     2 |         |
-| 0 | mercredi 13 septembre |    54 |         |
+| 0 | mercredi 13 septembre |    54 |     0.7 |
 |   | jeudi    14 septembre |     1 |         |
 |   | vendredi 15 septembre |     1 |         |
 
