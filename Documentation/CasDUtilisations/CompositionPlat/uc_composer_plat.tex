@@ -2,35 +2,35 @@
 
 \noindent \textbf{Nom:} Composer un plat \\
 \textbf{ID:} UC401\\
-\textbf{Description :} Le diététicien souhaite pouvoir composé un plat (petit-déjeuner, déjeuner, souper) en renseignant sa composition.\\
+\textbf{Description :} Le diététicien souhaite pouvoir composer un plat (petit-déjeuner, déjeuner, souper) en renseignant sa composition.\\
 \textbf{Auteurs :} Nicolas SYMPHORIEN\\
 \textbf{Date :} 16/06/2017 \\
 \textbf{Acteurs :} Le diététicien \\
 \textbf{Pré-condition :} \\
-Le diététicien doit être connecter (Voir le cas d'utilisation secondaire ``S'authentifier''). \\
+Le diététicien doit être connecté (Voir le cas d'utilisation secondaire ``S'authentifier''). \\
 La liste des plats doit être accessible.
 
 \noindent \textbf{Scénario principal : } Figure \ref{ComposerPlatSeq}
 
 \begin{enumerate}
-	\item \label{UC401_step1}Le système affiche la liste des plats déjà crée.
-	\item \label{UC401_step2}Le diététicien choisi de créer un nouveau plat.
+	\item \label{UC401_step1}Le système affiche la liste des plats déjà créée.
+	\item \label{UC401_step2}Le diététicien choisit de créer un nouveau plat.
 	\item Le système affiche une page permettant d'entrer les ingrédients composant le plat ainsi que leurs quantités
-	\item Le diététicien choisi les ingrédients qu'il veut mettre dans son plat
-	\item Le système enregistre le plat crée et affiche un message de confirmation de création
+	\item Le diététicien choisit les ingrédients qu'il veut mettre dans son plat
+	\item Le système enregistre le plat créé et affiche un message de confirmation de création
 \end{enumerate}
 
  \noindent \textbf{Scénario alternatif :}
 
-Les deux scénario alternatifs débute après l'étape \ref{UC401_step1} du scénario nominal.
+Les deux scénarios alternatifs débutent après l'étape \ref{UC401_step1} du scénario nominal.
 \begin{enumerate}
-	\item Le diététicien choisi de modifier un plat déjà existant.
+	\item Le diététicien choisit de modifier un plat déjà existant.
 	\begin{enumerate}
 		\item Le système affiche les ingrédients du plat à modifier
 		\item Le diététicien modifie la composition du plat et confirme les modifications
 		\item Le système enregistre le plat modifié et affiche un message de confirmation de modification
 	\end{enumerate}
-	\item Le diététicien choisi de supprimer un plat déjà existant.
+	\item Le diététicien choisit de supprimer un plat déjà existant.
 	\begin{enumerate}
 		\item Le système affiche un message d'avertissement avant la suppression
 		\item L'utilisateur confirme la suppression du plat
@@ -39,7 +39,7 @@ Les deux scénario alternatifs débute après l'étape \ref{UC401_step1} du scé
 \end{enumerate}
 Dans les deux cas, le cas d'utilisation reprend à l'étape \ref{UC401_step2} du scénario nominal.
 
-\noindent \textbf{Post-Conditions:} Le plat est crée, modifié ou supprimé.
+\noindent \textbf{Post-Conditions:} Le plat est créé, modifié ou supprimé.
 
 \begin{figure}
 \centering
