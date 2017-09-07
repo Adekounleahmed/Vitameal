@@ -2,7 +2,7 @@
 
 \noindent\textbf{Nom :} Consulter les menus \\
 \textbf{ID :} UC102 \\
-\textbf{Description :} Le service restauration souhaite pouvoir consulté les menus par groupe de patient. \\
+\textbf{Description :} Le service restauration souhaite pouvoir consulter les menus par groupe de patient. \\
 \textbf{Auteur :} Nicolas SYMPHORIEN \\
 \textbf{Dates(s) :} 11/06/2017 \\
 \textbf{Acteurs :} Le service restauration \\
@@ -11,9 +11,9 @@
 \noindent \textbf{Scénario principal :} Figure \ref{ConsulterMenusSeq}
 
 \begin{enumerate}
-	\item \label{UC102_step1}Le service restauration choisi le groupe de patient pour lequel il veut voir le menu.
+	\item \label{UC102_step1}Le service restauration choisit le groupe de patient pour lequel il veut voir le menu.
 	\item \label{UC102_step2}Le système affiche le menu de la semaine en cours selon le groupe de patient choisi
-	\item \label{UC102_step3}Le service restauration peut choisir de consulter le menu pour un autre groupe de patient, dans ce cas le cas d'utilisation reprend à l'étape \ref{UC102_step1}, sinon le cas d'utilisation se termine.
+	\item \label{UC102_step3}Le service restauration peut choisir de consulter le menu pour un autre groupe de patients, dans ce cas le cas d'utilisation reprend à l'étape \ref{UC102_step1}, sinon le cas d'utilisation se termine.
 \end{enumerate}
 
 \noindent \textbf{Scénario alternatif :}
@@ -28,11 +28,11 @@ Le scénario alternatif suivant débute après l'étape \ref{UC102_step2} du sc�
 Le scénario alternatif suivant débute après l'étape \ref{UC102_step2} du scénario nominal
 \begin{enumerate}
 	\item Le service restauration peut changer de semaine
-	\item Le système affiche le menu de la semaine choisi si il existe, sinon il affiche un message. 
+	\item Le système affiche le menu de la semaine choisi s'il existe, sinon il affiche un message. 
 \end{enumerate}
 Le cas d'utilisation reprend à l'étape \ref{UC102_step3} du scénario nominal.
 
-\noindent \textbf{Post-Conditions:} Le menu est affiché pour le groupe de patient choisi.
+\noindent \textbf{Post-Conditions:} Le menu est affiché pour le groupe de patients choisi.
 
 \begin{figure}
 \centering
